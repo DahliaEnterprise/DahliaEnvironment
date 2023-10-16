@@ -1,15 +1,27 @@
 <?php
 
-class dahliaenvironment_breadcumbs
+class dahliaenvironment_breadcrumbs
 {
-	$mysql_connection_handle = null;
+	public $mysql_connection_handle = null;
+	
+	public $array_of_selected_trails = [];
 	
 	function hike($username, $password)
 	{
-		$mysql_connection_handle = new PDO("mysql:host=localhost;dbname=newsite;", $username, $password);
+		$mysql_connection_handle = new PDO("mysql:host=localhost;dbname=newssite;", $username, $password);
 	}
 	
-	function 
+	
+	function select_trails($set_array_of_trails_to_select)
+	{
+	echo "test";
+		//Reset
+		$array_of_selected_trails = [];
+		
+		//Define
+		$array_of_selected_trails = $set_array_of_trails_to_select;
+		print_r($array_of_selected_trails);
+	}
 }
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 //Dahlia Environment: Handle
 //	Nessecary files to be included
-require_once("./breadcrumbs/dahliaenvironment_breadcumbs.php");
+include("/var/www/html/dahliaenvironment/breadcrumbs/dahliaenvironment_breadcrumbs.php");
 
 ?>
