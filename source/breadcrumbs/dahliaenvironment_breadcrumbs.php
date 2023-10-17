@@ -6,21 +6,74 @@ class dahliaenvironment_breadcrumbs
 	
 	public $array_of_selected_trails = [];
 	
-	function hike($username, $password)
+	public $table_selected_by_name = "";
+	
+	function hike($database_name, $username, $password)
 	{
-		$mysql_connection_handle = new PDO("mysql:host=localhost;dbname=newssite;", $username, $password);
+		$this->mysql_connection_handle = new PDO("mysql:host=localhost;dbname=".$database_name.";", $username, $password);
 	}
 	
 	
 	function select_trails($set_array_of_trails_to_select)
 	{
-	echo "test";
 		//Reset
-		$array_of_selected_trails = [];
+		$this->array_of_selected_trails = [];
 		
 		//Define
-		$array_of_selected_trails = $set_array_of_trails_to_select;
-		print_r($array_of_selected_trails);
+		$this->array_of_selected_trails = $set_array_of_trails_to_select;
+		
+	}
+	
+	function screened_area($set_from_table)
+	{
+		$this->table_selected_by_name = $set_from_table;
+	}
+	
+	function walk_the_operation()
+	{
+		$output = [];
+		
+		
+		if(sizeof($this->array_of_selected_trails) > 0)
+		{
+			if(strlen($this->table_selected_by_name) > 0)
+			{
+				//Create query
+				$query_as_string = "SELECT ";
+				
+					//Append columns
+					$append_to_columns_string = "";
+					$index = 0;
+					$total_indices = sizeof($this->array_of_selected_trails);
+					/*while($index < $total_indices)
+					{
+						if($index > 0)
+						{
+							$append_to_columns_string .= ",";
+							$append_to_columns_string .= $array_of_selected_trails[$index];
+							
+						}else if($index == 0)
+						{
+							$append_to_columns_string = $array_of_selected_trails[0];
+						}
+						
+						$index = $index + 1;
+					}
+					*/
+					$query_as_string .= $append_to_columns_string;
+					
+					//FROM text
+					$query_as_string .= " FROM ";
+					
+					//
+					$query_as_string .= $table_selected_by_name;
+					
+				//run query
+				$output["stmt"] = $mysql_connection_handle->query($query_as_string);
+			}
+		}
+		
+		return $output;
 	}
 }
 
