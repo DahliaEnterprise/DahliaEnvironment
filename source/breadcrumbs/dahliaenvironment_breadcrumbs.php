@@ -45,35 +45,40 @@ class dahliaenvironment_breadcrumbs
 					$append_to_columns_string = "";
 					$index = 0;
 					$total_indices = sizeof($this->array_of_selected_trails);
-					/*while($index < $total_indices)
+					while($index < $total_indices)
 					{
 						if($index > 0)
 						{
 							$append_to_columns_string .= ",";
-							$append_to_columns_string .= $array_of_selected_trails[$index];
+							$append_to_columns_string .= $this->array_of_selected_trails[$index];
 							
 						}else if($index == 0)
 						{
-							$append_to_columns_string = $array_of_selected_trails[0];
+							$append_to_columns_string = $this->array_of_selected_trails[0];
 						}
 						
 						$index = $index + 1;
 					}
-					*/
+					
 					$query_as_string .= $append_to_columns_string;
 					
 					//FROM text
 					$query_as_string .= " FROM ";
 					
 					//
-					$query_as_string .= $table_selected_by_name;
+					$query_as_string .= $this->table_selected_by_name;
 					
 				//run query
-				$output["stmt"] = $mysql_connection_handle->query($query_as_string);
+				$output["stmt"] = $this->mysql_connection_handle->query($query_as_string);
 			}
 		}
 		
 		return $output;
+	}
+	
+	function inaugurate_hike_according_to_plan_using_select_trails_only($set_array_of_trails_to_select, $set_from_table)
+	{
+		
 	}
 }
 
