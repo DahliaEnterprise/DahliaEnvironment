@@ -4,9 +4,13 @@ class dahliaenvironment_breadcrumbs
 {
 	public $mysql_connection_handle = null;
 	
-	public $array_of_selected_trails = [];
-	
-	public $table_selected_by_name = "";
+		//Select trails operations related
+		public $selected_trails_array_of_selected_trails = [];
+		
+		public $selected_trails_table_selected_by_name = "";
+		
+		//New trail operations related
+		//TODO ?
 	
 	function hike($database_name, $username, $password)
 	{
@@ -29,7 +33,7 @@ class dahliaenvironment_breadcrumbs
 		$this->table_selected_by_name = $set_from_table;
 	}
 	
-	function walk_the_operation()
+	function walk_the_select_trails_operation()
 	{
 		$output = [];
 		
@@ -80,8 +84,48 @@ class dahliaenvironment_breadcrumbs
 	{
 		$this->select_trails(["id"]);
 		$this->screened_area("test");
-		$experience_results = $this->walk_the_operation();
+		$experience_results = $this->walk_the_select_trails_operation();
 		return $experience_results;
+	}
+	
+	function create_new_trail($screened_area_name, $list_of_trails_as_array_values)
+	{
+		//create "list of trails"
+		$list_of_trails = "";
+		$list_of_trails_index = 0;
+		while($list_of_trails_index < sizeof($list_of_trails_as_array_values))
+		{
+			if($list_of_trails_index == 0)
+			{
+				$list_of_trails = "".$list_of_trails_as_array_values[0];
+			}else if($list_of_trails_index > 0)
+			{
+				$list_of_trails .= ",".$list_of_trails_as_array_values[$list_of_trails_index];
+			}
+			
+			$list_of_trails_index = $list_of_trails_index + 1;
+		}
+		
+		//create "list of values"
+		$list_of_values = "";
+		$list_of_values_index = 0;
+		while($list_of_values_index < sizeof($list_of_trails_as_array_values))
+		{
+			if($list_of_values_index == 0)
+			{
+				$list_of_values = "?";
+			}else if($list_of_values_index > 0)
+			{
+				$list_of_values .= ",?";
+			}
+			
+			$list_of_values_index = $list_of_values_index + 1;
+		}
+		
+		$query_as_string = "INSERT INTO ".$screened_area_name." (".$list_of_trails.") VALUES(".$list_of_values.");";
+		echo $query_as_string;
+		//$stmt = $this->mysql_connection_handle->prepare($query_as_string);
+		
 	}
 }
 
