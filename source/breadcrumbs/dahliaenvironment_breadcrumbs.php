@@ -88,7 +88,7 @@ class dahliaenvironment_breadcrumbs
 		return $experience_results;
 	}
 	
-	function create_new_trail($screened_area_name, $list_of_trails_as_array_values)
+	function create_new_trail($screened_area_name, $list_of_trails_as_array_values, $list_of_decorations_as_array_values)
 	{
 		//create "list of trails"
 		$list_of_trails = "";
@@ -106,7 +106,7 @@ class dahliaenvironment_breadcrumbs
 			$list_of_trails_index = $list_of_trails_index + 1;
 		}
 		
-		//create "list of values"
+		//create "list of values" place holders
 		$list_of_values = "";
 		$list_of_values_index = 0;
 		while($list_of_values_index < sizeof($list_of_trails_as_array_values))
@@ -121,11 +121,11 @@ class dahliaenvironment_breadcrumbs
 			
 			$list_of_values_index = $list_of_values_index + 1;
 		}
+
 		
 		$query_as_string = "INSERT INTO ".$screened_area_name." (".$list_of_trails.") VALUES(".$list_of_values.");";
-		echo $query_as_string;
-		//$stmt = $this->mysql_connection_handle->prepare($query_as_string);
-		
+		$stmt = $this->mysql_connection_handle->prepare($query_as_string);
+		$stmt->execute($list_of_decorations_as_array_values);
 	}
 }
 
