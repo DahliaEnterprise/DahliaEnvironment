@@ -127,6 +127,46 @@ class dahliaenvironment_breadcrumbs
 		$stmt = $this->mysql_connection_handle->prepare($query_as_string);
 		$stmt->execute($list_of_decorations_as_array_values);
 	}
+	
+	
+	function update_trail($screened_area, $array_of_trails_and_values)
+	{
+	print_r($array_of_trails_and_values);
+		$query_as_string = "UPDATE ".$screened_area." SET ";
+		$definitions = "";
+		reset($array_of_trails_and_values);
+		$array_of_trails_and_values_index = 0;
+		while($array_of_trails_and_values_index < sizeof($array_of_trails_and_values))
+		{
+			if($array_of_trails_and_values_index == 0)
+			{
+				$definitions = key($array_of_trails_and_values)." = ? ";
+			}else if($array_of_trails_and_values_index > 0)
+			{
+				$definitions .= ", ".key($array_of_trails_and_values)." = ?";
+			}
+			
+			$array_of_trails_and_values_index = $array_of_trails_and_values_index + 1;
+		}
+		
+		$query_as_string .= $definitions;
+		
+		$stmt = $this->mysql_connection_handle->prepare($query_as_string);
+		
+		//Execute
+			//Convert to format
+			reset($array_of_trails_and_values);
+			$array_of_trails_and_values_execute_format = [];
+			$array_of_trails_and_values_index = 0;
+			while($array_of_trails_and_values_index < sizeof($array_of_trails_and_values))
+			{
+				$array_of_trails_and_values_execute_format[$array_of_trails_and_values_index] = current($array_of_trails_and_values);
+				
+				$array_of_trails_and_values_index = $array_of_trails_and_values_index + 1;
+			}
+			
+			$stmt->execute($array_of_trails_and_values_execute_format);
+	}
 }
 
 ?>
