@@ -144,10 +144,12 @@ class dahliaenvironment_breadcrumbs
 			{
 				$definitions .= ", ".key($list_of_trail_decorations_as_array_values)." = ? ";
 			}
-			
+			next($list_of_trail_decorations_as_array_values);
 			$list_of_trail_decorations_as_array_values_index = $list_of_trail_decorations_as_array_values_index + 1;
 		}
-		
+
+		echo $definitions;
+
 		$query_as_string .= $definitions;
 		
 		//Define where definitions
@@ -171,7 +173,6 @@ class dahliaenvironment_breadcrumbs
 		
 		$stmt = $this->mysql_connection_handle->prepare($query_as_string);
 		
-		
 		//Execute
 			//Convert to format
 			$list_of_trail_decorations_as_array_values_execute_format = [];
@@ -181,7 +182,7 @@ class dahliaenvironment_breadcrumbs
 				$list_of_trail_decorations_as_array_values_index = 0;
 				while($list_of_trail_decorations_as_array_values_index < sizeof($list_of_trail_decorations_as_array_values))
 				{
-					$list_of_trail_decorations_as_array_values_execute_format[$list_of_trail_decorations_as_array_values_index] = current($list_of_trail_decorations_as_array_values);
+					$list_of_trail_decorations_as_array_values_execute_format[$list_of_trail_decorations_as_array_values_execute_format_index] = current($list_of_trail_decorations_as_array_values);
 
 					next($list_of_trail_decorations_as_array_values);
 
@@ -190,20 +191,22 @@ class dahliaenvironment_breadcrumbs
 					$list_of_trail_decorations_as_array_values_index = $list_of_trail_decorations_as_array_values_index + 1;
 				}
 
-				/*
+
 				//"WHERE" values
 				reset($limit_changes_to_specific_decorations_as_array_values);
 				$limit_changes_to_specific_decorations_as_array_values_index = 0;
 				while($limit_changes_to_specific_decorations_as_array_values_index < sizeof($limit_changes_to_specific_decorations_as_array_values))
 				{
-					$list_of_trail_decorations_as_array_values_execute_format[$list_of_trail_decorations_as_array_values_index] = $limit_changes_to_specific_decorations_as_array_values);
+					$list_of_trail_decorations_as_array_values_execute_format[$list_of_trail_decorations_as_array_values_execute_format_index] = $limit_changes_to_specific_decorations_as_array_values[$limit_changes_to_specific_decorations_as_array_values_index]["decoration_to_limit_to"];
 
 					$limit_changes_to_specific_decorations_as_array_values_index = $limit_changes_to_specific_decorations_as_array_values_index + 1;
 				}
-				*/
+
+				echo "<br/>";
+				var_dump($list_of_trail_decorations_as_array_values_execute_format);
 
 			
-			//$stmt->execute($list_of_trail_decorations_as_array_values_execute_format);
+			$stmt->execute($list_of_trail_decorations_as_array_values_execute_format);
 			
 	}
 }
