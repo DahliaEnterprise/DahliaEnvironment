@@ -8,9 +8,7 @@ class dahliaenvironment_breadcrumbs
 		public $selected_trails_array_of_selected_trails = [];
 		
 		public $selected_trails_table_selected_by_name = "";
-		
-		//New trail operations related
-		//TODO ?
+
 	
 	function hike($database_name, $username, $password)
 	{
@@ -129,43 +127,84 @@ class dahliaenvironment_breadcrumbs
 	}
 	
 	
-	function update_trail($screened_area, $array_of_trails_and_values)
+	function update_trail($screened_area, $list_of_trail_decorations_as_array_values, $limit_changes_to_specific_decorations_as_array_values = [])
 	{
-	print_r($array_of_trails_and_values);
 		$query_as_string = "UPDATE ".$screened_area." SET ";
+		
+		//Define definitions
 		$definitions = "";
-		reset($array_of_trails_and_values);
-		$array_of_trails_and_values_index = 0;
-		while($array_of_trails_and_values_index < sizeof($array_of_trails_and_values))
+		reset($list_of_trail_decorations_as_array_values);
+		$list_of_trail_decorations_as_array_values_index = 0;
+		while($list_of_trail_decorations_as_array_values_index < sizeof($list_of_trail_decorations_as_array_values))
 		{
-			if($array_of_trails_and_values_index == 0)
+			if($list_of_trail_decorations_as_array_values_index == 0)
 			{
-				$definitions = key($array_of_trails_and_values)." = ? ";
-			}else if($array_of_trails_and_values_index > 0)
+				$definitions = key($list_of_trail_decorations_as_array_values)." = ? ";
+			}else if($list_of_trail_decorations_as_array_values_index > 0)
 			{
-				$definitions .= ", ".key($array_of_trails_and_values)." = ?";
+				$definitions .= ", ".key($list_of_trail_decorations_as_array_values)." = ? ";
 			}
 			
-			$array_of_trails_and_values_index = $array_of_trails_and_values_index + 1;
+			$list_of_trail_decorations_as_array_values_index = $list_of_trail_decorations_as_array_values_index + 1;
 		}
 		
 		$query_as_string .= $definitions;
 		
+		//Define where definitions
+		$where_directive_and_definitions = "WHERE ";
+		$limit_changes_to_specific_decorations_as_array_values_index = 0;
+		while($limit_changes_to_specific_decorations_as_array_values_index < sizeof($limit_changes_to_specific_decorations_as_array_values))
+		{
+			if($limit_changes_to_specific_decorations_as_array_values_index == 0)
+			{
+				$where_directive_and_definitions .= $limit_changes_to_specific_decorations_as_array_values[0]["trail_name"]." = ?";
+			}else if($limit_changes_to_specific_decorations_as_array_values_index > 0)
+			{
+				$where_directive_and_definitions .= ", ".$limit_changes_to_specific_decorations_as_array_values[$limit_changes_to_specific_decorations_as_array_values_index]["trail_name"]." = ? ";
+			}
+
+			$limit_changes_to_specific_decorations_as_array_values_index = $limit_changes_to_specific_decorations_as_array_values_index + 1;
+		}
+
+		$query_as_string .= $where_directive_and_definitions;
+		echo $query_as_string;
+		
 		$stmt = $this->mysql_connection_handle->prepare($query_as_string);
+		
 		
 		//Execute
 			//Convert to format
-			reset($array_of_trails_and_values);
-			$array_of_trails_and_values_execute_format = [];
-			$array_of_trails_and_values_index = 0;
-			while($array_of_trails_and_values_index < sizeof($array_of_trails_and_values))
-			{
-				$array_of_trails_and_values_execute_format[$array_of_trails_and_values_index] = current($array_of_trails_and_values);
-				
-				$array_of_trails_and_values_index = $array_of_trails_and_values_index + 1;
-			}
+			$list_of_trail_decorations_as_array_values_execute_format = [];
+			$list_of_trail_decorations_as_array_values_execute_format_index = 0;
+				//"SET" values
+				reset($list_of_trail_decorations_as_array_values);
+				$list_of_trail_decorations_as_array_values_index = 0;
+				while($list_of_trail_decorations_as_array_values_index < sizeof($list_of_trail_decorations_as_array_values))
+				{
+					$list_of_trail_decorations_as_array_values_execute_format[$list_of_trail_decorations_as_array_values_index] = current($list_of_trail_decorations_as_array_values);
+
+					next($list_of_trail_decorations_as_array_values);
+
+					$list_of_trail_decorations_as_array_values_execute_format_index = $list_of_trail_decorations_as_array_values_execute_format_index + 1;
+
+					$list_of_trail_decorations_as_array_values_index = $list_of_trail_decorations_as_array_values_index + 1;
+				}
+
+				/*
+				//"WHERE" values
+				reset($limit_changes_to_specific_decorations_as_array_values);
+				$limit_changes_to_specific_decorations_as_array_values_index = 0;
+				while($limit_changes_to_specific_decorations_as_array_values_index < sizeof($limit_changes_to_specific_decorations_as_array_values))
+				{
+					$list_of_trail_decorations_as_array_values_execute_format[$list_of_trail_decorations_as_array_values_index] = $limit_changes_to_specific_decorations_as_array_values);
+
+					$limit_changes_to_specific_decorations_as_array_values_index = $limit_changes_to_specific_decorations_as_array_values_index + 1;
+				}
+				*/
+
 			
-			$stmt->execute($array_of_trails_and_values_execute_format);
+			//$stmt->execute($list_of_trail_decorations_as_array_values_execute_format);
+			
 	}
 }
 
