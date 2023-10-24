@@ -182,6 +182,7 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 document.getElementById("news_story_tablet_container").style.opacity = "0.0";
                 document.getElementById("body_container").style.opacity = "0.0";
                 document.getElementById("personalize_your_experience_hover_container").style.opacity = 0.0;
+
                 //fade_in_all_page_elements.begin_fade_in();
             }
 
@@ -202,7 +203,6 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
 
                         document.getElementById("news_story_tablet_container").style.opacity = new_opacity;
                         document.getElementById("body_container").style.opacity = new_opacity;
-                        console.log(document.getElementById("news_story_tablet_container").style.opacity);
 
                     }else{
                         this.fade_in_timer_interval = null;
@@ -215,14 +215,16 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
 
                     if(this.fade_in_stage == 1)
                     {
-
-                        document.getElementById("personalize_your_experience_hover_container").style.opacity = parseFloat(document.getElementById("personalize_your_experience_hover_container").style.opacity) + 0.01;
+                        document.getElementById("personalize_your_experience_hover_container").style.opacity = parseFloat(document.getElementById("personalize_your_experience_hover_container").style.opacity) + 0.035;
                     }
-
-
                 }
             }
             /** ** ** **/
+
+            function initailize_personalized_experience()
+            {
+
+            }
         </script>
     </head>
     <body onLoad="page_loaded();">
@@ -310,7 +312,7 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
         </div>
         <div id="personalize_your_experience_hover_container">
             <div class="personalize_your_experience_button_container">
-                <a href="/personalize" class="personalize_your_experience">Personalize your experience</a>
+                <a href="javascript:void(0)" onClick= "initailize_personalized_experience();" class="personalize_your_experience">Personalize your experience</a>
             </div>
         </div>
         <Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/>
