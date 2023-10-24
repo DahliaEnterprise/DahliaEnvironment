@@ -20,6 +20,7 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Prompt:ital@1&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <style type="text/css">
             *{
                 margin:0;
@@ -104,6 +105,27 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 width: 150px;
                 height:150px;
 
+            }
+
+            .personalize_your_experience:link
+            {
+                color:#FFF;
+                text-decoration: none;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            .personalize_your_experience:active
+            {
+                color:#FFF;
+                text-decoration: none;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            .personalize_your_experience:visited
+            {
+                color:#FFF;
+                text-decoration: none;
+                font-family: 'Roboto', sans-serif;
             }
         </style>
     </head>
@@ -190,8 +212,10 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 </div>
             </div>
         </div>
-        <div style="position:fixed;bottom:0;left:0;width:99.999999%;height:50px;background:white;text-align:center;">
-            <a href="/personalize">Personalize your experience</a>
+        <div style="position:fixed;bottom:0;left:0;width:99.999999%;height:30px;background:white;text-align:center;background-color:#c4ae78;padding-top:0.5em;box-shadow: 1px -2px 5px 2px rgba(0,0,0,0.53);
+-webkit-box-shadow: 1px -2px 5px 2px rgba(0,0,0,0.53);
+-moz-box-shadow: 1px -2px 5px 2px rgba(0,0,0,0.53);">
+            <a href="/personalize" class="personalize_your_experience">Personalize your experience</a>
         </div>
         <Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/>
     </body>
