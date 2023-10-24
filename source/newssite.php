@@ -51,6 +51,7 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 text-align:center;
                 padding-top:0.5em;
                 padding-bottom:0.5em;
+
             }
 
             .news_story_main_attraction_container
@@ -65,6 +66,11 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 border:1px solid #000;
                 height:300px;
                 background-color:grey;
+            }
+
+            #news_story_tablet_container
+            {
+                opacity:0.0;
             }
 
             .news_story_tablet_story_container
@@ -107,6 +113,21 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
 
             }
 
+            #personalize_your_experience_hover_container
+            {
+                    position:fixed;
+                    bottom:0;
+                    left:0;
+                    width:99.999999%;
+                    height:30px;
+                    background:white;
+                    text-align:center;
+                    background-color:#c4ae78;
+                    box-shadow: 1px -2px 5px 2px rgba(0,0,0,0.53);
+                    -webkit-box-shadow: 1px -2px 5px 2px rgba(0,0,0,0.53);
+                    -moz-box-shadow: 1px -2px 5px 2px rgba(0,0,0,0.53);
+            }
+
             .personalize_your_experience:link
             {
                 color:#FFF;
@@ -127,10 +148,85 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 text-decoration: none;
                 font-family: 'Roboto', sans-serif;
             }
+
+            .personalize_your_experience_button_container
+            {
+                background: rgb(196,174,120);
+                background: linear-gradient(90deg, rgba(196,174,120,1) 0%, rgba(213,191,136,1) 17%, rgba(213,191,136,1) 83%, rgba(196,174,120,1) 100%);
+                width:400px;
+                height:30px;
+                margin:auto;
+            }
+
+            .personalize_your_experience_button_container:hover
+            {
+                 background: rgb(196,174,120);
+                background: linear-gradient(90deg, rgba(196,174,120,1) 0%, rgba(176,156,106,1) 17%, rgba(176,156,106,1) 83%, rgba(196,174,120,1) 100%);
+                width:400px;
+                height:30px;
+                margin:auto;
+                padding-top:0.2em;
+            }
+
+
+
         </style>
+        <script type="text/javascript">
+            var fade_in_all_page_elements = null;
+
+
+
+            function page_loaded()
+            {
+                fade_in_all_page_elements = new page_loaded_fade_in_elements();
+                document.getElementById("news_story_tablet_container").style.opacity = "0.0";
+                document.getElementById("body_container").style.opacity = "0.0";
+                document.getElementById("personalize_your_experience_hover_container").style.opacity = 0.0;
+                //fade_in_all_page_elements.begin_fade_in();
+            }
+
+            /** ** ** **/
+            class page_loaded_fade_in_elements
+            {
+                constructor()
+                {
+                    this.fade_in_stage = 0;
+                    this.fade_in_timer_iterval = setInterval(this.begin_fade_in, (1000/30));
+                }
+
+                begin_fade_in()
+                {
+                    let new_opacity = ( parseFloat(document.getElementById("news_story_tablet_container").style.opacity) + 0.03 );
+                    if(parseInt(new_opacity * 1000000) < 1000000)
+                    {
+
+                        document.getElementById("news_story_tablet_container").style.opacity = new_opacity;
+                        document.getElementById("body_container").style.opacity = new_opacity;
+                        console.log(document.getElementById("news_story_tablet_container").style.opacity);
+
+                    }else{
+                        this.fade_in_timer_interval = null;
+                    }
+
+                    if((new_opacity * 1000000) >= 500000)
+                    {
+                        this.fade_in_stage = 1;
+                    }
+
+                    if(this.fade_in_stage == 1)
+                    {
+
+                        document.getElementById("personalize_your_experience_hover_container").style.opacity = parseFloat(document.getElementById("personalize_your_experience_hover_container").style.opacity) + 0.01;
+                    }
+
+
+                }
+            }
+            /** ** ** **/
+        </script>
     </head>
-    <body>
-        <div id="header">
+    <body onLoad="page_loaded();">
+        <div id="body_container">
             <div style="" class="header_text">
                 The News Site Times
             </div>
@@ -157,7 +253,7 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                     &nbsp;
                 </div>
             </div>
-            <div class="news_story_tablet_container">
+            <div id="news_story_tablet_container">
                 <div class="news_story_tablet_story_container">
                     <div class="news_story_tablet_story_left">
                         <div class="news_story_table_story_image_container">
@@ -212,10 +308,10 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 </div>
             </div>
         </div>
-        <div style="position:fixed;bottom:0;left:0;width:99.999999%;height:30px;background:white;text-align:center;background-color:#c4ae78;padding-top:0.5em;box-shadow: 1px -2px 5px 2px rgba(0,0,0,0.53);
--webkit-box-shadow: 1px -2px 5px 2px rgba(0,0,0,0.53);
--moz-box-shadow: 1px -2px 5px 2px rgba(0,0,0,0.53);">
-            <a href="/personalize" class="personalize_your_experience">Personalize your experience</a>
+        <div id="personalize_your_experience_hover_container">
+            <div class="personalize_your_experience_button_container">
+                <a href="/personalize" class="personalize_your_experience">Personalize your experience</a>
+            </div>
         </div>
         <Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/>
     </body>
