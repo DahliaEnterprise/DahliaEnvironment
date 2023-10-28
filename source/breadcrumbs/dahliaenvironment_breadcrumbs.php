@@ -80,8 +80,8 @@ class dahliaenvironment_breadcrumbs
 	
 	function inaugurate_hike_according_to_plan_using_select_trails_only($set_array_of_trails_to_select, $set_from_table)
 	{
-		$this->select_trails(["id"]);
-		$this->screened_area("test");
+		$this->select_trails($set_array_of_trails_to_select);
+		$this->screened_area($set_from_table);
 		$experience_results = $this->walk_the_select_trails_operation();
 		return $experience_results;
 	}
