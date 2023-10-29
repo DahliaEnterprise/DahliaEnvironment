@@ -177,7 +177,7 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
         <script type="text/javascript">
             var fade_in_all_page_elements = null;
 
-
+            var hideandseek_object = null;
 
             function page_loaded()
             {
@@ -231,80 +231,81 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 document.getElementById("personalize_your_experience_login_form_container").style.display = "block";
             }
 
-class DahliaEnvironmentHideAndSeek {
-    constructor() {
-        this.characterMap = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\";:,<.>/?~`!@#$%^&*()-_=+[{]}|\\";
-    }
 
-    decorationElementIterator(character, iterations) {
-        const output = {
-            character: `${character}`,
-            successfulProcess: -1
-        };
-
-        // Find index of character contained within the character map
-        let characterFound = 1;
-        let indexOfCharacterWithinCharacterMap = 0;
-        let keepSearching = 1;
-
-        while (keepSearching === 1) {
-            if (this.characterMap.charAt(indexOfCharacterWithinCharacterMap) === character) {
-                keepSearching = 0;
-            } else {
-                indexOfCharacterWithinCharacterMap = indexOfCharacterWithinCharacterMap + 1;
-                if (indexOfCharacterWithinCharacterMap >= this.characterMap.length) {
-                    characterFound = 1;
-                    keepSearching = 0;
-                }
-            }
-        }
-
-        if (characterFound === 1) {
-            // Index of character found
-            // Traverse the index of the character map with the strength of intended iterations
-            let strengthAchievedIntensityTraversed = 0;
-            let characterMapIndex = indexOfCharacterWithinCharacterMap;
-
-            while (strengthAchievedIntensityTraversed < iterations) {
-                characterMapIndex = characterMapIndex + 1;
-                if (characterMapIndex >= this.characterMap.length) {
-                    // Loop to the beginning of the ring buffer
-                    characterMapIndex = 0;
+            class DahliaEnvironmentHideAndSeek {
+                constructor() {
+                    this.characterMap = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\";:,<.>/?~`!@#$%^&*()-_=+[{]}|\\";
                 }
 
-                strengthAchievedIntensityTraversed = strengthAchievedIntensityTraversed + 1;
-            }
+                decorationElementIterator(character, iterations) {
+                    const output = {
+                        character: `${character}`,
+                        successfulProcess: -1
+                    };
 
-            // Produce result
-            output.character = `${this.characterMap.charAt(characterMapIndex)}`;
-            output.successfulProcess = 1;
-        }
+                    // Find index of character contained within the character map
+                    let characterFound = 1;
+                    let indexOfCharacterWithinCharacterMap = 0;
+                    let keepSearching = 1;
 
-        return output;
-    }
+                    while (keepSearching === 1) {
+                        if (this.characterMap.charAt(indexOfCharacterWithinCharacterMap) === character) {
+                            keepSearching = 0;
+                        } else {
+                            indexOfCharacterWithinCharacterMap = indexOfCharacterWithinCharacterMap + 1;
+                            if (indexOfCharacterWithinCharacterMap >= this.characterMap.length) {
+                                characterFound = 1;
+                                keepSearching = 0;
+                            }
+                        }
+                    }
 
-    hide(decorationToHide) {
-        let output = "";
+                    if (characterFound === 1) {
+                        // Index of character found
+                        // Traverse the index of the character map with the strength of intended iterations
+                        let strengthAchievedIntensityTraversed = 0;
+                        let characterMapIndex = indexOfCharacterWithinCharacterMap;
 
-        // INPUT MUST BE LARGER THAN 32 CHARACTERS.
+                        while (strengthAchievedIntensityTraversed < iterations) {
+                            characterMapIndex = characterMapIndex + 1;
+                            if (characterMapIndex >= this.characterMap.length) {
+                                // Loop to the beginning of the ring buffer
+                                characterMapIndex = 0;
+                            }
 
-        // For each character, iterate using the integer representation of each and every other character (excluding the character to be modified).
-        const totalCharacters = decorationToHide.length;
+                            strengthAchievedIntensityTraversed = strengthAchievedIntensityTraversed + 1;
+                        }
 
-        for (let decorationToHideIndex = 0; decorationToHideIndex < totalCharacters; decorationToHideIndex++) {
-            const characterToIterate = decorationToHide.charAt(decorationToHideIndex);
+                        // Produce result
+                        output.character = `${this.characterMap.charAt(characterMapIndex)}`;
+                        output.successfulProcess = 1;
+                    }
 
-            for (let characterIterator = 0; characterIterator < totalCharacters; characterIterator++) {
-                // Skip the index pertaining to "characterToIterate"
-                if (characterIterator !== decorationToHideIndex) {
-                    // Apply iterate
+                    return output;
+                }
+
+                hide(decorationToHide) {
+                    let output = "";
+
+                    // INPUT MUST BE LARGER THAN 32 CHARACTERS.
+
+                    // For each character, iterate using the integer representation of each and every other character (excluding the character to be modified).
+                    const totalCharacters = decorationToHide.length;
+
+                    for (let decorationToHideIndex = 0; decorationToHideIndex < totalCharacters; decorationToHideIndex++) {
+                        const characterToIterate = decorationToHide.charAt(decorationToHideIndex);
+
+                        for (let characterIterator = 0; characterIterator < totalCharacters; characterIterator++) {
+                            // Skip the index pertaining to "characterToIterate"
+                            if (characterIterator !== decorationToHideIndex) {
+                                // Apply iterate
+                            }
+                        }
+                    }
+
+                    return output;
                 }
             }
-        }
-
-        return output;
-    }
-}
         </script>
     </head>
     <body onLoad="page_loaded();">
@@ -395,7 +396,9 @@ class DahliaEnvironmentHideAndSeek {
                 <a href="javascript:void(0)" onClick= "initailize_personalized_experience();" class="personalize_your_experience">Personalize your experience</a>
             </div>
             <div id="personalize_your_experience_login_form_container">
-                <input type="text" style="height:50px;text-align:center;"/><br/>
+                <input type="text" placeholder="Phone Number" style="height:25px;text-align:center;margin-top:0.5em;"/><br/>
+                <input type="password" placeholder="Password" style="height:25px;text-align:center;"/><br/>
+                <input type="password" placeholder="Password Shade" style="height:25px;text-align:center;"/><br/>
             </div>
         </div>
         <Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/>
