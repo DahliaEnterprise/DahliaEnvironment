@@ -149,7 +149,7 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 font-family: 'Roboto', sans-serif;
             }
 
-            .personalize_your_experience_button_container
+            #personalize_your_experience_button_container
             {
                 background: rgb(196,174,120);
                 background: linear-gradient(90deg, rgba(196,174,120,1) 0%, rgba(213,191,136,1) 17%, rgba(213,191,136,1) 83%, rgba(196,174,120,1) 100%);
@@ -158,7 +158,7 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 margin:auto;
             }
 
-            .personalize_your_experience_button_container:hover
+            #personalize_your_experience_button_container:hover
             {
                  background: rgb(196,174,120);
                 background: linear-gradient(90deg, rgba(196,174,120,1) 0%, rgba(176,156,106,1) 17%, rgba(176,156,106,1) 83%, rgba(196,174,120,1) 100%);
@@ -168,7 +168,10 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 padding-top:0.2em;
             }
 
-
+            #personalize_your_experience_login_form_container
+            {
+                display:none;
+            }
 
         </style>
         <script type="text/javascript">
@@ -223,8 +226,85 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
 
             function initailize_personalized_experience()
             {
-
+                document.getElementById("personalize_your_experience_hover_container").style.height = "100px";
+                document.getElementById("personalize_your_experience_button_container").style.display = "none";
+                document.getElementById("personalize_your_experience_login_form_container").style.display = "block";
             }
+
+class DahliaEnvironmentHideAndSeek {
+    constructor() {
+        this.characterMap = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\";:,<.>/?~`!@#$%^&*()-_=+[{]}|\\";
+    }
+
+    decorationElementIterator(character, iterations) {
+        const output = {
+            character: `${character}`,
+            successfulProcess: -1
+        };
+
+        // Find index of character contained within the character map
+        let characterFound = 1;
+        let indexOfCharacterWithinCharacterMap = 0;
+        let keepSearching = 1;
+
+        while (keepSearching === 1) {
+            if (this.characterMap.charAt(indexOfCharacterWithinCharacterMap) === character) {
+                keepSearching = 0;
+            } else {
+                indexOfCharacterWithinCharacterMap = indexOfCharacterWithinCharacterMap + 1;
+                if (indexOfCharacterWithinCharacterMap >= this.characterMap.length) {
+                    characterFound = 1;
+                    keepSearching = 0;
+                }
+            }
+        }
+
+        if (characterFound === 1) {
+            // Index of character found
+            // Traverse the index of the character map with the strength of intended iterations
+            let strengthAchievedIntensityTraversed = 0;
+            let characterMapIndex = indexOfCharacterWithinCharacterMap;
+
+            while (strengthAchievedIntensityTraversed < iterations) {
+                characterMapIndex = characterMapIndex + 1;
+                if (characterMapIndex >= this.characterMap.length) {
+                    // Loop to the beginning of the ring buffer
+                    characterMapIndex = 0;
+                }
+
+                strengthAchievedIntensityTraversed = strengthAchievedIntensityTraversed + 1;
+            }
+
+            // Produce result
+            output.character = `${this.characterMap.charAt(characterMapIndex)}`;
+            output.successfulProcess = 1;
+        }
+
+        return output;
+    }
+
+    hide(decorationToHide) {
+        let output = "";
+
+        // INPUT MUST BE LARGER THAN 32 CHARACTERS.
+
+        // For each character, iterate using the integer representation of each and every other character (excluding the character to be modified).
+        const totalCharacters = decorationToHide.length;
+
+        for (let decorationToHideIndex = 0; decorationToHideIndex < totalCharacters; decorationToHideIndex++) {
+            const characterToIterate = decorationToHide.charAt(decorationToHideIndex);
+
+            for (let characterIterator = 0; characterIterator < totalCharacters; characterIterator++) {
+                // Skip the index pertaining to "characterToIterate"
+                if (characterIterator !== decorationToHideIndex) {
+                    // Apply iterate
+                }
+            }
+        }
+
+        return output;
+    }
+}
         </script>
     </head>
     <body onLoad="page_loaded();">
@@ -311,8 +391,11 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
             </div>
         </div>
         <div id="personalize_your_experience_hover_container">
-            <div class="personalize_your_experience_button_container">
+            <div id="personalize_your_experience_button_container">
                 <a href="javascript:void(0)" onClick= "initailize_personalized_experience();" class="personalize_your_experience">Personalize your experience</a>
+            </div>
+            <div id="personalize_your_experience_login_form_container">
+                <input type="text" style="height:50px;text-align:center;"/><br/>
             </div>
         </div>
         <Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/>
