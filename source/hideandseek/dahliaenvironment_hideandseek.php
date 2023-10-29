@@ -2,12 +2,12 @@
 
 class dahliaenvironment_hideandseek
 {
-    $character_map = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\";:,<.>/?~`!@#$%^&*()-_=+[{]}|\\";
+    public $character_map = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\";:,<.>/?~`!@#$%^&*()-_=+[{]}|\\";
 
     function decoration_element_iterator($character, $iterations)
     {
         $output = [];
-        $output["character"] = ""+$character;
+        $output["character"] = "".$character;
         $output["successful_process"] = -1;
 
         //Find index of character contained within the character map
@@ -16,7 +16,7 @@ class dahliaenvironment_hideandseek
         $keep_searching = 1;
         while( $keep_searching == 1 )
         {
-            if( strcmp($character_map[$index_of_character_within_character_map], $character) == 0 )
+            if( strcmp($this->character_map[$index_of_character_within_character_map], $character) == 0 )
             {
                 $keep_searching = 0;
             }else{
@@ -35,20 +35,20 @@ class dahliaenvironment_hideandseek
             //traverse the index of the character map strength of intended iterations
             $strength_achieved_intensity_traversed = 0;
             $character_map_index = $index_of_character_within_character_map;
-            while($strength_achieved_intesity_traversed < $iterations)
+            while( $strength_achieved_intensity_traversed < $iterations )
             {
                 $character_map_index = $character_map_index + 1;
-                if($character_map_index >= strlen($character_map))
+                if( $character_map_index >= strlen($this->character_map) )
                 {
                     //loop to begining of ring buffer
                     $character_map_index = 0;
                 }
 
-                $strength_achieved_intesity_traversed = $strength_achieved_intesity_traversed + 1;
+                $strength_achieved_intensity_traversed = $strength_achieved_intensity_traversed + 1;
             }
 
             //produce result
-            $output["character"] = "".$character_map[$strength_achieved_intesity_traversed];
+            $output["character"] = "".$this->character_map[$character_map_index];
             $output["successful_process"] = 1;
         }
 
