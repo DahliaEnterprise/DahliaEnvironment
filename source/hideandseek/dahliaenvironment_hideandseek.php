@@ -59,6 +59,8 @@ class dahliaenvironment_hideandseek
     {
         $output = "";
 
+        $consensus_via_inteded_group_iterations = 1000;
+
         //INPUT MUST BE LARGER THAN 32 CHARACTERS.
         if( strlen($decoration_to_hide) >= 32)
         {
@@ -75,6 +77,17 @@ class dahliaenvironment_hideandseek
                 $decoration_to_hide_index_second = 0;
                 while( $decoration_to_hide_index_second < $total_characters )
                 {
+                    //For each character within decoration_to_hide iterate
+                        //Allow for multiplication within the formula (greater than one, no larger than desired computation time)
+                        $character_iterations = 2;
+                        //multiply by index
+                        $character_iterations = $character_iterations * $decoration_to_hide_index_second;
+                        //multiply by iterations intended
+                        $character_iterations = $character_iterations * $consensus_via_inteded_group_iterations;
+
+                        //excersize iteration
+                        $character_to_iterate = $this->decoration_element_iterator($character_to_iterate, $character_iterations);
+
 
                     $decoration_to_hide_index_second = $decoration_to_hide_index_second + 1;
                 }
