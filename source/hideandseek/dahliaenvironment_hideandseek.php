@@ -60,28 +60,31 @@ class dahliaenvironment_hideandseek
         $output = "";
 
         //INPUT MUST BE LARGER THAN 32 CHARACTERS.
-
-        //For each character iterate using the integer representation of each and every other character(exluding the character to be modified).
-        $total_characters = strlen($decoration_to_hide);
-        $decoration_to_hide_index = 0;
-        while( $decoration_to_hide_index < $total_characters )
+        if( strlen($decoration_to_hide) >= 32)
         {
-            $character_to_iterate = $decoration_to_hide[$decoration_to_hide_index];
 
-            $character_iterator = 0;
-            while( $character_iterator < $total_characters )
+            //For each character iterate using the integer representation of each and every other character(exluding the character to be modified).
+            $total_characters = strlen($decoration_to_hide);
+            $decoration_to_hide_index = 0;
+            while( $decoration_to_hide_index < $total_characters )
             {
+                $character_to_iterate = $decoration_to_hide[$decoration_to_hide_index];
 
-                //skip the index pertaining to "character_to_iterate"
-                if($character_iterator != $decoration_to_hide_index)
+
+                //For each character within decoration_to_hide iterate with the strength according to index position within character map
+                $decoration_to_hide_index_second = 0;
+                while( $decoration_to_hide_index_second < $total_characters )
                 {
-                    //apply iterate
 
+                    $decoration_to_hide_index_second = $decoration_to_hide_index_second + 1;
                 }
-            }
 
-            $index = $index + 1;
+
+
+                $index = $index + 1;
+            }
         }
+
 
         return $output;
     }

@@ -401,6 +401,8 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 <input type="password" placeholder="Password Shade" style="height:25px;text-align:center;"/><br/>
             </div>
         </div>
-        <Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/><Br/>
+        <div id="footer_spacer">
+               &nbsp;
+        </div>
     </body>
 </html>
