@@ -18,9 +18,11 @@ class dahliaenvironment_hideandseek
             $string_of_rotated_each_character_second_index = 0;
             while( $string_of_rotated_each_character_second_index < strlen($string_of_rotated_each_character) )
             {
-                //nessecary: calculate total iterations
+                //calculate total iterations
+                $total_iterations = ($this->get_character_map_index_by_character($character_to_apply_additive_rotation) + 2);
+                $total_iterations = $total_iterations * ($string_of_rotated_each_character_index + 2);
 
-                $iterator_result = $this->decoration_element_iterator($character_to_apply_additive_rotation, 123);
+                $iterator_result = $this->decoration_element_iterator($character_to_apply_additive_rotation, $total_iterations);
                 $character_to_apply_additive_rotation = $iterator_result["character"];
 
                 $string_of_rotated_each_character_second_index = $string_of_rotated_each_character_second_index + 1;
@@ -128,49 +130,14 @@ class dahliaenvironment_hideandseek
 
         //Apply self additive rotation
         $self_additive_rotation_applied = $this->self_additive_rotation($string_of_rotated_each_character);
-        var_dump($self_additive_rotation_applied);
 
         //Truncate the end of the result
+        $truncated_string = substr($self_additive_rotation_applied, 0, 32);
 
+        //convert to hex format
+        $hex_format = bin2hex($truncated_string);
 
-        /*
-        //For each character iterate using the integer representation of each and every other character(exluding the character to be modified).
-        $total_characters = strlen($decoration_to_hide);
-        $decoration_to_hide_index = 0;
-        while( $decoration_to_hide_index < $total_characters )
-        {
-            $character_to_iterate = $decoration_to_hide[$decoration_to_hide_index];
-
-            $character_iterations = 0;
-
-            //For each character within decoration_to_hide iterate with the strength according to index position within character map
-            $decoration_to_hide_index_second = 0;
-            while( $decoration_to_hide_index_second < $total_characters )
-            {
-
-                //For each character within decoration_to_hide iterate
-                    //Allow for multiplication within the formula (greater than one, no larger than desired computation time)
-                    $character_iterations = 2;
-                    //multiply by character map index
-                    $character_iterations = $character_iterations * $this->get_character_map_index_by_character($character_to_iterate);
-                    //multiply by index
-                    $character_iterations = $character_iterations * ( $decoration_to_hide_index_second + 2 );
-                    //multiply by iterations intended
-                    $character_iterations = $character_iterations * $consensus_via_inteded_group_iterations;
-                    //var_dump($character_iterations);
-                    //excersize iteration
-                    $character_to_iterate_result = $this->decoration_element_iterator($character_to_iterate, $character_iterations);
-
-                    $character_to_iterate = $character_to_iterate_result["character"];
-
-                $decoration_to_hide_index_second = $decoration_to_hide_index_second + 1;
-
-            }
-
-            $output = $output.$character_to_iterate;
-            $decoration_to_hide_index = $decoration_to_hide_index + 1;
-        }
-        */
+        $output = $hex_format;
 
         return $output;
     }
