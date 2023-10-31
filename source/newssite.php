@@ -13,9 +13,9 @@ $newssite_breadcrumbs->hike("newssite", "root", "password");
 $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_according_to_plan_using_select_trails_only(["id", "display_name"], "directory_of_categories");
 
 $newssite_hideandseek = new dahliaenvironment_hideandseek();
-//$result = $newssite_hideandseek->hide("abcdefghijklmnopabcdefghijklmnopabcdefghijklmnopabcdefghijklmnop", 1264);
-//var_dump($result);
-var_dump($newssite_hideandseek->get_character_map_index_by_character("b"));
+$result = $newssite_hideandseek->hide("abcdefghijklmnopqrstuvwxyz", 123);
+var_dump($result);
+//var_dump($newssite_hideandseek->get_character_map_index_by_character("b"));
 ?>
 <html>
     <head>

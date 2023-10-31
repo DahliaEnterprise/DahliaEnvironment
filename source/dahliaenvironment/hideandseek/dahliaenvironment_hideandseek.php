@@ -4,6 +4,9 @@ class dahliaenvironment_hideandseek
 {
     public $character_map = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\";:,<.>/?~`!@#$%^&*()-_=+[{]}|\\";
 
+
+
+
     function get_character_map_index_by_character($character)
     {
         $found_character_map_index_corresponding_to_character = -1;
@@ -25,6 +28,31 @@ class dahliaenvironment_hideandseek
         return $output;
     }
 
+    function rotate_each_character_according_to_character_map_index_and_string_character_index($decoration_to_rotate)
+    {
+        $output = "";
+
+        $decoration_to_rotate_index = 0;
+        while( $decoration_to_rotate_index < strlen($decoration_to_rotate) )
+        {
+            //Handle character from "decoration_to_rotate"
+            $character_from_decoration_to_rotate = $decoration_to_rotate[$decoration_to_rotate_index];
+            //Determine total iterations
+                //Add character map index to iterations (ensure it will grow by making it at least 2 or greater)
+                $character_rotate_iterations = $this->get_character_map_index_by_character($character_from_decoration_to_rotate) + 2;
+                //multiply by decoration_to_rotate_index (ensure it will grow by making it at least 2 or greater)
+                $character_rotate_iterations = $character_rotate_iterations * ($decoration_to_rotate_index + 2);
+
+            //commit to rotation
+            $iteration_result = $this->decoration_element_iterator($character_from_decoration_to_rotate, $character_rotate_iterations);
+            $output =$output.$iteration_result["character"];
+
+            $decoration_to_rotate_index = $decoration_to_rotate_index + 1;
+        }
+
+        return $output;
+    }
+
     function decoration_element_iterator($character, $iterations)
     {
         $output = [];
@@ -32,34 +60,13 @@ class dahliaenvironment_hideandseek
         $output["successful_process"] = -1;
 
         //Find index of character contained within the character map
-        /*
-        $character_found = 1;
-        $index_of_character_within_character_map = 0;
-        $keep_searching = 1;
-        while( $keep_searching == 1 )
-        {
-
-
-            if( strcmp($this->character_map[$index_of_character_within_character_map], $output["character"]) == 0 )
-            {
-                $keep_searching = 0;
-                $character_found = 1;
-
-            }else{
-                $index_of_character_within_character_map = $index_of_character_within_character_map + 1;
-                if( $index_of_character_within_character_map >= strlen($this->character_map) )
-                {
-                    $keep_searching = 0;
-                }
-            }
-        }*/
-        $index_of_character_within_character_map = get_character_map_index_by_character($character);
+        $index_of_character_within_character_map = $this->get_character_map_index_by_character($character);
         $character_found = 0;
         if($index_of_character_within_character_map > -1){ $character_found = 1; }
 
         if( $character_found == 1 )
         {
-            //=$ index of character found
+            //index of character found
             //traverse the index of the character map strength of intended iterations
             $strength_achieved_intensity_traversed = 0;
             $character_map_index = $index_of_character_within_character_map;
@@ -88,49 +95,53 @@ class dahliaenvironment_hideandseek
     {
         $output = "";
 
+        //Rotate each character according to character map ring
+        var_dump($this->rotate_each_character_according_to_character_map_index_and_string_character_index($decoration_to_hide));
 
-        //INPUT MUST BE LARGER THAN 32 CHARACTERS.
-        if( strlen($decoration_to_hide) >= 1)
+        //Apply self additive rotation
+
+
+        //Truncate the end of the result
+
+
+        /*
+        //For each character iterate using the integer representation of each and every other character(exluding the character to be modified).
+        $total_characters = strlen($decoration_to_hide);
+        $decoration_to_hide_index = 0;
+        while( $decoration_to_hide_index < $total_characters )
         {
+            $character_to_iterate = $decoration_to_hide[$decoration_to_hide_index];
 
-            //For each character iterate using the integer representation of each and every other character(exluding the character to be modified).
-            $total_characters = strlen($decoration_to_hide);
-            $decoration_to_hide_index = 0;
-            while( $decoration_to_hide_index < $total_characters )
+            $character_iterations = 0;
+
+            //For each character within decoration_to_hide iterate with the strength according to index position within character map
+            $decoration_to_hide_index_second = 0;
+            while( $decoration_to_hide_index_second < $total_characters )
             {
-                $character_to_iterate = $decoration_to_hide[$decoration_to_hide_index];
 
-                $character_iterations = 0;
+                //For each character within decoration_to_hide iterate
+                    //Allow for multiplication within the formula (greater than one, no larger than desired computation time)
+                    $character_iterations = 2;
+                    //multiply by character map index
+                    $character_iterations = $character_iterations * $this->get_character_map_index_by_character($character_to_iterate);
+                    //multiply by index
+                    $character_iterations = $character_iterations * ( $decoration_to_hide_index_second + 2 );
+                    //multiply by iterations intended
+                    $character_iterations = $character_iterations * $consensus_via_inteded_group_iterations;
+                    //var_dump($character_iterations);
+                    //excersize iteration
+                    $character_to_iterate_result = $this->decoration_element_iterator($character_to_iterate, $character_iterations);
 
-                //For each character within decoration_to_hide iterate with the strength according to index position within character map
-                $decoration_to_hide_index_second = 0;
-                while( $decoration_to_hide_index_second < $total_characters )
-                {
+                    $character_to_iterate = $character_to_iterate_result["character"];
 
-                    //For each character within decoration_to_hide iterate
-                        //Allow for multiplication within the formula (greater than one, no larger than desired computation time)
-                        $character_iterations = 2;
-                        //multiply by character map index
-                        $character_iterations = $character_iterations *
-                        //multiply by index
-                        $character_iterations = $character_iterations * ( $decoration_to_hide_index_second + 2 );
-                        //multiply by iterations intended
-                        $character_iterations = $character_iterations * $consensus_via_inteded_group_iterations;
+                $decoration_to_hide_index_second = $decoration_to_hide_index_second + 1;
 
-                        //excersize iteration
-                        $character_to_iterate_result = $this->decoration_element_iterator($character_to_iterate, $character_iterations);
-
-                        $character_to_iterate = $character_to_iterate_result["character"];
-
-                    $decoration_to_hide_index_second = $decoration_to_hide_index_second + 1;
-
-                }
-
-                $output = $output.$character_to_iterate;
-                $decoration_to_hide_index = $decoration_to_hide_index + 1;
             }
-        }
 
+            $output = $output.$character_to_iterate;
+            $decoration_to_hide_index = $decoration_to_hide_index + 1;
+        }
+        */
 
         return $output;
     }
