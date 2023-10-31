@@ -75,7 +75,7 @@ class dahliaenvironment_hideandseek
 
             //commit to rotation
             $iteration_result = $this->decoration_element_iterator($character_from_decoration_to_rotate, $character_rotate_iterations);
-            $output =$output.$iteration_result["character"];
+            $output = $output.$iteration_result["character"];
 
             $decoration_to_rotate_index = $decoration_to_rotate_index + 1;
         }
@@ -121,7 +121,7 @@ class dahliaenvironment_hideandseek
         return $output;
     }
 
-    function hide( $decoration_to_hide, $consensus_via_inteded_group_iterations )
+    function hide( $decoration_to_hide)
     {
         $output = "";
 

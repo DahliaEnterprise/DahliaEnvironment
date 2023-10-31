@@ -12,9 +12,6 @@ $newssite_breadcrumbs->hike("newssite", "root", "password");
 /** Cache information **/
 $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_according_to_plan_using_select_trails_only(["id", "display_name"], "directory_of_categories");
 
-$newssite_hideandseek = new dahliaenvironment_hideandseek();
-$result = $newssite_hideandseek->hide("abdcdefghijdklmnospqrstudvwxyzabdcdefghijdklmnopqrstudvwxyzabdcdefghijdklmnopqrstudvwxyzabdcdefghijdklmnopqrstudvwxyzabdcdefghijdklmnopqrstudvwxyz", 123);
-var_dump($result);
 //var_dump($newssite_hideandseek->get_character_map_index_by_character("b"));
 ?>
 <html>
@@ -175,6 +172,18 @@ var_dump($result);
             #personalize_your_experience_login_form_container
             {
                 display:none;
+                margin-top:0.3em;
+            }
+
+            #commence_personalization_button
+            {
+                text-decoration:none;
+                color:#FFF;
+            }
+
+            #footer_spacer
+            {
+                height:200px;
             }
 
         </style>
@@ -230,85 +239,117 @@ var_dump($result);
 
             function initailize_personalized_experience()
             {
-                document.getElementById("personalize_your_experience_hover_container").style.height = "100px";
+                document.getElementById("personalize_your_experience_hover_container").style.height = "120px";
                 document.getElementById("personalize_your_experience_button_container").style.display = "none";
                 document.getElementById("personalize_your_experience_login_form_container").style.display = "block";
             }
 
 
+
+
             class DahliaEnvironmentHideAndSeek {
                 constructor() {
-                    this.characterMap = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\";:,<.>/?~`!@#$%^&*()-_=+[{]}|\\";
+                    this.characterMap =
+                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\";:,<.>/?~`!@#$%^&*()-_=+[{]}|\\";
+                }
+
+                selfAdditiveRotation(stringOfRotatedEachCharacter) {
+                    let output = "";
+                    for (let stringOfRotatedEachCharacterIndex = 0; stringOfRotatedEachCharacterIndex < stringOfRotatedEachCharacter.length; stringOfRotatedEachCharacterIndex++) {
+                    let characterToApplyAdditiveRotation = stringOfRotatedEachCharacter[stringOfRotatedEachCharacterIndex];
+
+                    let totalIterations =
+                        this.getCharacterMapIndexByCharacter(characterToApplyAdditiveRotation) + 2;
+                    totalIterations *= stringOfRotatedEachCharacterIndex + 2;
+
+                    const iteratorResult = this.decorationElementIterator(
+                        characterToApplyAdditiveRotation,
+                        totalIterations
+                    );
+                    characterToApplyAdditiveRotation = iteratorResult.character;
+
+                    output += characterToApplyAdditiveRotation;
+                    }
+                    return output;
+                }
+
+                getCharacterMapIndexByCharacter(character) {
+                    let foundCharacterMapIndexCorrespondingToCharacter = -1;
+                    for (let characterMapIndex = 0; characterMapIndex < this.characterMap.length; characterMapIndex++) {
+                    if (this.characterMap[characterMapIndex] === character) {
+                        foundCharacterMapIndexCorrespondingToCharacter = characterMapIndex;
+                        break;
+                    }
+                    }
+                    return foundCharacterMapIndexCorrespondingToCharacter;
+                }
+
+                rotateEachCharacterAccordingToCharacterMapIndexAndStringCharacterIndex(decorationToRotate) {
+                    let output = "";
+                    for (let decorationToRotateIndex = 0; decorationToRotateIndex < decorationToRotate.length; decorationToRotateIndex++) {
+                    const characterFromDecorationToRotate = decorationToRotate[decorationToRotateIndex];
+                    let characterRotateIterations =
+                        this.getCharacterMapIndexByCharacter(characterFromDecorationToRotate) + 2;
+                    characterRotateIterations *= decorationToRotateIndex + 2;
+
+                    const iterationResult = this.decorationElementIterator(
+                        characterFromDecorationToRotate,
+                        characterRotateIterations
+                    );
+                    output += iterationResult.character;
+                    }
+                    return output;
                 }
 
                 decorationElementIterator(character, iterations) {
-                    const output = {
-                        character: `${character}`,
-                        successfulProcess: -1
+                    let output = {
+                    character: character,
+                    successfulProcess: -1,
                     };
-
-                    // Find index of character contained within the character map
-                    let characterFound = 1;
-                    let indexOfCharacterWithinCharacterMap = 0;
-                    let keepSearching = 1;
-
-                    while (keepSearching === 1) {
-                        if (this.characterMap.charAt(indexOfCharacterWithinCharacterMap) === character) {
-                            keepSearching = 0;
-                        } else {
-                            indexOfCharacterWithinCharacterMap = indexOfCharacterWithinCharacterMap + 1;
-                            if (indexOfCharacterWithinCharacterMap >= this.characterMap.length) {
-                                characterFound = 1;
-                                keepSearching = 0;
-                            }
-                        }
+                    const indexOfCharacterWithinCharacterMap = this.getCharacterMapIndexByCharacter(character);
+                    let characterFound = 0;
+                    if (indexOfCharacterWithinCharacterMap > -1) {
+                    characterFound = 1;
                     }
 
                     if (characterFound === 1) {
-                        // Index of character found
-                        // Traverse the index of the character map with the strength of intended iterations
-                        let strengthAchievedIntensityTraversed = 0;
-                        let characterMapIndex = indexOfCharacterWithinCharacterMap;
-
-                        while (strengthAchievedIntensityTraversed < iterations) {
-                            characterMapIndex = characterMapIndex + 1;
-                            if (characterMapIndex >= this.characterMap.length) {
-                                // Loop to the beginning of the ring buffer
-                                characterMapIndex = 0;
-                            }
-
-                            strengthAchievedIntensityTraversed = strengthAchievedIntensityTraversed + 1;
-                        }
-
-                        // Produce result
-                        output.character = `${this.characterMap.charAt(characterMapIndex)}`;
-                        output.successfulProcess = 1;
+                    let strengthAchievedIntensityTraversed = 0;
+                    let characterMapIndex = indexOfCharacterWithinCharacterMap;
+                    while (strengthAchievedIntensityTraversed < iterations) {
+                        characterMapIndex = (characterMapIndex + 1) % this.characterMap.length;
+                        strengthAchievedIntensityTraversed++;
                     }
-
+                    output.character = this.characterMap[characterMapIndex];
+                    output.characterMapIndex = characterMapIndex;
+                    output.successfulProcess = 1;
+                    }
                     return output;
                 }
 
-                hide(decorationToHide) {
+                hide(decorationToHide, consensusViaIntendedGroupIterations) {
                     let output = "";
-
-                    // INPUT MUST BE LARGER THAN 32 CHARACTERS.
-
-                    // For each character, iterate using the integer representation of each and every other character (excluding the character to be modified).
-                    const totalCharacters = decorationToHide.length;
-
-                    for (let decorationToHideIndex = 0; decorationToHideIndex < totalCharacters; decorationToHideIndex++) {
-                        const characterToIterate = decorationToHide.charAt(decorationToHideIndex);
-
-                        for (let characterIterator = 0; characterIterator < totalCharacters; characterIterator++) {
-                            // Skip the index pertaining to "characterToIterate"
-                            if (characterIterator !== decorationToHideIndex) {
-                                // Apply iterate
-                            }
-                        }
-                    }
-
+                    const stringOfRotatedEachCharacter = this.rotateEachCharacterAccordingToCharacterMapIndexAndStringCharacterIndex(
+                    decorationToHide
+                    );
+                    const selfAdditiveRotationApplied = this.selfAdditiveRotation(stringOfRotatedEachCharacter);
+                    const truncatedString = selfAdditiveRotationApplied.substring(0, 32);
+                    output = truncatedString;
                     return output;
                 }
+            }
+
+
+            const dahlia = new DahliaEnvironmentHideAndSeek();
+
+
+            function initiate_personalization()
+            {
+                //disable inputs (to prevent resubmission during submission process)
+                document.getElementById("personalize_your_experience_input_phonenumber").disabled = true;
+                document.getElementById("personalize_your_experience_input_password").disabled = true;
+                document.getElementById("personalize_your_experience_input_passwordshade").disabled = true;
+                const hiddenData = dahlia.hide("Hello, World!", 5);
+                console.log(hiddenData);
             }
         </script>
     </head>
@@ -400,9 +441,10 @@ var_dump($result);
                 <a href="javascript:void(0)" onClick= "initailize_personalized_experience();" class="personalize_your_experience">Personalize your experience</a>
             </div>
             <div id="personalize_your_experience_login_form_container">
-                <input type="text" placeholder="Phone Number" style="height:25px;text-align:center;margin-top:0.5em;"/><br/>
-                <input type="password" placeholder="Password" style="height:25px;text-align:center;"/><br/>
-                <input type="password" placeholder="Password Shade" style="height:25px;text-align:center;"/><br/>
+                <input type="text" id="personalize_your_experience_input_phonenumber" placeholder="Phone Number" style="height:25px;text-align:center;margin-top:0.5em;"/><br/>
+                <input type="password" id="personalize_your_experience_input_password" placeholder="Password" style="height:25px;text-align:center;"/><br/>
+                <input type="password" id="personalize_your_experience_input_passwordshade" placeholder="Password Shade" style="height:25px;text-align:center;"/><br/>
+                <a href="javascript:void(0);" onClick="initiate_personalization();" id="commence_personalization_button">Commence Personalization</a>
             </div>
         </div>
         <div id="footer_spacer">
