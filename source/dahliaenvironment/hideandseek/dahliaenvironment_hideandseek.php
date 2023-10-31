@@ -5,6 +5,34 @@ class dahliaenvironment_hideandseek
     public $character_map = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\";:,<.>/?~`!@#$%^&*()-_=+[{]}|\\";
 
 
+    function self_additive_rotation($string_of_rotated_each_character)
+    {
+        $output = "";
+
+        $string_of_rotated_each_character_index = 0;
+        while( $string_of_rotated_each_character_index < strlen($string_of_rotated_each_character) )
+        {
+            $character_to_apply_additive_rotation = $string_of_rotated_each_character[$string_of_rotated_each_character_index];
+
+            //per each character within string
+            $string_of_rotated_each_character_second_index = 0;
+            while( $string_of_rotated_each_character_second_index < strlen($string_of_rotated_each_character) )
+            {
+                //nessecary: calculate total iterations
+
+                $iterator_result = $this->decoration_element_iterator($character_to_apply_additive_rotation, 123);
+                $character_to_apply_additive_rotation = $iterator_result["character"];
+
+                $string_of_rotated_each_character_second_index = $string_of_rotated_each_character_second_index + 1;
+            }
+
+            $output = $output.$character_to_apply_additive_rotation;
+
+            $string_of_rotated_each_character_index = $string_of_rotated_each_character_index + 1;
+        }
+
+        return $output;
+    }
 
 
     function get_character_map_index_by_character($character)
@@ -96,10 +124,11 @@ class dahliaenvironment_hideandseek
         $output = "";
 
         //Rotate each character according to character map ring
-        var_dump($this->rotate_each_character_according_to_character_map_index_and_string_character_index($decoration_to_hide));
+        $string_of_rotated_each_character = $this->rotate_each_character_according_to_character_map_index_and_string_character_index($decoration_to_hide);
 
         //Apply self additive rotation
-
+        $self_additive_rotation_applied = $this->self_additive_rotation($string_of_rotated_each_character);
+        var_dump($self_additive_rotation_applied);
 
         //Truncate the end of the result
 
