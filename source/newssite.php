@@ -12,7 +12,6 @@ $newssite_breadcrumbs->hike("newssite", "root", "password");
 /** Cache information **/
 $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_according_to_plan_using_select_trails_only(["id", "display_name"], "directory_of_categories");
 
-//var_dump($newssite_hideandseek->get_character_map_index_by_character("b"));
 ?>
 <html>
     <head>
@@ -249,8 +248,7 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
 
             class DahliaEnvironmentHideAndSeek {
                 constructor() {
-                    this.characterMap =
-                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\";:,<.>/?~`!@#$%^&*()-_=+[{]}|\\";
+                    this.characterMap = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\";:,<.>/?~`!@#$%^&*()-_=+[{]}|\\";
                 }
 
                 selfAdditiveRotation(stringOfRotatedEachCharacter) {
@@ -326,7 +324,7 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                     return output;
                 }
 
-                hide(decorationToHide, consensusViaIntendedGroupIterations) {
+                hide(decorationToHide) {
                     let output = "";
                     const stringOfRotatedEachCharacter = this.rotateEachCharacterAccordingToCharacterMapIndexAndStringCharacterIndex(
                     decorationToHide
@@ -348,8 +346,35 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 document.getElementById("personalize_your_experience_input_phonenumber").disabled = true;
                 document.getElementById("personalize_your_experience_input_password").disabled = true;
                 document.getElementById("personalize_your_experience_input_passwordshade").disabled = true;
-                const hiddenData = dahlia.hide("Hello, World!", 5);
-                console.log(hiddenData);
+
+                let plaintext_password = document.getElementById("personalize_your_experience_input_password").value;
+                let total_repetitions_to_be_greater_than_32_characters = 0;
+                if(plaintext_password.length < 32)
+                {
+                    total_repetitions_to_be_greater_than_32_characters = Math.ceil( 32 / plaintext_password.length );
+                    let total_times_repeated = 0;
+                    let repeated_password = "";
+                    while(total_times_repeated < total_repetitions_to_be_greater_than_32_characters)
+                    {
+                        repeated_password = repeated_password + plaintext_password;
+                        total_times_repeated = total_times_repeated + 1;
+                    }
+
+                    //apply password shade
+                    let total_shades = parseInt(document.getElementById("personalize_your_experience_input_passwordshade").value);
+                    let shade_index = 0;
+                    while(shade_index < total_shades)
+                    {
+                        repeated_password = repeated_password + plaintext_password;
+                        shade_index = shade_index + 1;
+                    }
+                    const hiddenData = dahlia.hide(repeated_password);
+                    console.log(hiddenData);
+                }else{
+
+                    const hiddenData = dahlia.hide(plaintext_password);
+                    console.log(hiddenData);
+                }
             }
         </script>
     </head>
