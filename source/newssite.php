@@ -12,6 +12,9 @@ $newssite_breadcrumbs->hike("newssite", "root", "password");
 /** Cache information **/
 $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_according_to_plan_using_select_trails_only(["id", "display_name"], "directory_of_categories");
 
+
+$newssite_gate_authorization = new dahliaenvironment_gate_authorization();
+$newssite_gate_authorization->authorize_for_stream("root", , $database_host, $phone_number, $password);
 ?>
 <html>
     <head>
