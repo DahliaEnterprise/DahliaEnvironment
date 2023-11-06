@@ -14,7 +14,7 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
 
 
 $newssite_gate_authorization = new dahliaenvironment_gate_authorization();
-$newssite_gate_authorization->authorize_for_stream("root", , $database_host, $phone_number, $password);
+$newssite_gate_authorization->authorize_for_stream("newssite", "root", "password", "localhost", "client_credentials", "1234567890", "password");
 ?>
 <html>
     <head>
