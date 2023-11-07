@@ -12,9 +12,11 @@ $newssite_breadcrumbs->hike("newssite", "root", "password");
 /** Cache information **/
 $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_according_to_plan_using_select_trails_only(["id", "display_name"], "directory_of_categories");
 
-
+/*
 $newssite_gate_authorization = new dahliaenvironment_gate_authorization();
-$newssite_gate_authorization->authorize_for_stream("newssite", "root", "password", "localhost", "client_credentials", "1234567890", "password");
+$result = $newssite_gate_authorization->authorize_for_stream("newssite", "root", "password", "localhost", "client_credentials", "1234567890", "password");
+var_dump($result);
+*/
 ?>
 <html>
     <head>
@@ -246,7 +248,33 @@ $newssite_gate_authorization->authorize_for_stream("newssite", "root", "password
                 document.getElementById("personalize_your_experience_login_form_container").style.display = "block";
             }
 
+            let gate_authorization_xmlhttprequest = null;
 
+            function initiate_gate_authorization()
+            {
+                let method = "GET";
+                let url = "/gate_authorization/credentials_check.php";
+
+                gate_authorization_xmlhttprequest.open(method, url, true);
+
+                gate_authorization_xmlhttprequest.onreadystatechange = function()
+                {
+                    if (gate_authorization_xmlhttprequest.readyState === 4)
+                    {
+                        if (gate_authorization_xmlhttprequest.status === 200)
+                        {
+                            let text = gate_authorization_xmlhttprequest.responseText;
+                            console.log(text);
+                        }else{
+                            console.error("Request failed with status code: " + gate_authorization_xmlhttprequest.status);
+                        }
+                    }
+                };
+
+                // Send the request
+                gate_authorization_xmlhttprequest.send();
+
+            }
 
 
             class DahliaEnvironmentHideAndSeek {
