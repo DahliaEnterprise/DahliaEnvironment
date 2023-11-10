@@ -8,7 +8,7 @@ class dahliaenvironment_gate_authorization
         $output["client_found"] = -1;
         $output["id"] = -1;
 
-        $database_connection_handle = new PDO("mysql:host=localhost;dbname=".$database_name.";", $database_username, $database_password);
+        $database_connection_handle = new PDO("mysql:host=".$database_host.";dbname=".$database_name.";", $database_username, $database_password);
         $query_as_string = "SELECT `id` FROM ".$database_table_name." WHERE `phonenumber` = ? AND `password` = ? LIMIT 0,1";
         $stmt = $database_connection_handle->prepare($query_as_string);
         $stmt->bindParam(1, $phone_number, PDO::PARAM_INT);
