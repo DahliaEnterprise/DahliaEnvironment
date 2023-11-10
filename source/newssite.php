@@ -259,8 +259,9 @@ var_dump($result);
 
                 //Send request
                 let method = "GET";
-                let url = "/xmlhttprequest/byzantine_signal_gate_authorization/byzantine_signal_gate_authorization.php";
+                let url = "/dahliaenvironment/xmlhttprequest/byzantine_signal_gate_authorization/byzantine_signal_gate_authorization.php";
 
+                gate_authorization_xmlhttprequest = new XMLHttpRequest();
                 gate_authorization_xmlhttprequest.open(method, url, true);
 
                 gate_authorization_xmlhttprequest.onreadystatechange = function()
