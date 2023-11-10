@@ -3,6 +3,9 @@
 //Include the dahlia environment
 include("/var/www/html/dahliaenvironment/dahliaenvironment.php");
 
+//Include database connection information
+include("/var/www/html/dahliaenvironment/include_configuration/database/dahliaenvironment_include_configuration_database_newssite.php");
+
 
 $newssite_breadcrumbs = new dahliaenvironment_breadcrumbs();
 
@@ -12,11 +15,6 @@ $newssite_breadcrumbs->hike("newssite", "root", "password");
 /** Cache information **/
 $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_according_to_plan_using_select_trails_only(["id", "display_name"], "directory_of_categories");
 
-/*
-$newssite_gate_authorization = new dahliaenvironment_gate_authorization();
-$result = $newssite_gate_authorization->authorize_for_stream("newssite", "root", "password", "localhost", "client_credentials", "1234567890", "password");
-var_dump($result);
-*/
 ?>
 <html>
     <head>
