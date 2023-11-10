@@ -248,36 +248,73 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
 
             let gate_authorization_xmlhttprequest = null;
 
+            const dahlia = new DahliaEnvironmentHideAndSeek();
+
+
             function initiate_gate_authorization()
             {
                 //Disable inputs to prevent changes and reflect information submitted during transmission and "negotiation"
                 document.getElementById("personalize_your_experience_input_phonenumber").disabled = true;
                 document.getElementById("personalize_your_experience_input_password").disabled = true;
-                document.getElementById("personalize_your_experience_input_passwordshade").disabled = true;
 
                 //Send request
-                let method = "GET";
-                let url = "/dahliaenvironment/xmlhttprequest/byzantine_signal_gate_authorization/byzantine_signal_gate_authorization.php";
+                    //prepare information given
+                    let phonenumber = document.getElementById("personalize_your_experience_input_phonenumber").value;
+                    let plaintext_password = document.getElementById("personalize_your_experience_input_password").value;
+                    let total_shades = parseInt(document.getElementById("personalize_your_experience_input_passwordshade").value);
 
-                gate_authorization_xmlhttprequest = new XMLHttpRequest();
-                gate_authorization_xmlhttprequest.open(method, url, true);
-
-                gate_authorization_xmlhttprequest.onreadystatechange = function()
-                {
-                    if (gate_authorization_xmlhttprequest.readyState === 4)
+                    let hiddenData = "";
+                    let total_repetitions_to_be_greater_than_32_characters = 0;
+                    if(plaintext_password.length < 32)
                     {
-                        if (gate_authorization_xmlhttprequest.status === 200)
+                        total_repetitions_to_be_greater_than_32_characters = Math.ceil( 32 / plaintext_password.length );
+                        let total_times_repeated = 0;
+                        let repeated_password = "";
+                        while(total_times_repeated < total_repetitions_to_be_greater_than_32_characters)
                         {
-                            let text = gate_authorization_xmlhttprequest.responseText;
-                            console.log(text);
-                        }else{
-                            console.error("Request failed with status code: " + gate_authorization_xmlhttprequest.status);
+                            repeated_password = repeated_password + plaintext_password;
+                            total_times_repeated = total_times_repeated + 1;
                         }
-                    }
-                };
 
-                // Send the request
-                gate_authorization_xmlhttprequest.send();
+                        //apply password shade
+
+                        let shade_index = 0;
+                        while(shade_index < total_shades)
+                        {
+                            repeated_password = repeated_password + plaintext_password;
+                            shade_index = shade_index + 1;
+                        }
+                        hiddenData = dahlia.hide(repeated_password);
+                    }else{
+                        //TODO apply total shades
+                        hiddenData = dahlia.hide(plaintext_password);
+                    }
+
+                    //prepare to send
+                    let method = "GET";
+                    let url = "/dahliaenvironment/xmlhttprequest/byzantine_signal_gate_authorization/byzantine_signal_gate_authorization.php";
+                    url = url + "?phonenumber="+encodeURIComponent(phonenumber)+"&password="+encodeURIComponent(hiddenData);
+                    console.log(url);
+
+                    gate_authorization_xmlhttprequest = new XMLHttpRequest();
+                    gate_authorization_xmlhttprequest.open(method, url, true);
+
+                    gate_authorization_xmlhttprequest.onreadystatechange = function()
+                    {
+                        if (gate_authorization_xmlhttprequest.readyState === 4)
+                        {
+                            if (gate_authorization_xmlhttprequest.status === 200)
+                            {
+                                let text = gate_authorization_xmlhttprequest.responseText;
+                                console.log(text);
+                            }else{
+                                console.error("Request failed with status code: " + gate_authorization_xmlhttprequest.status);
+                            }
+                        }
+                    };
+
+                    //send the request
+                    gate_authorization_xmlhttprequest.send();
 
             }
 
@@ -372,46 +409,6 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 }
             }
 
-
-            const dahlia = new DahliaEnvironmentHideAndSeek();
-
-
-            function initiate_personalization()
-            {
-                //disable inputs (to prevent resubmission during submission process)
-                document.getElementById("personalize_your_experience_input_phonenumber").disabled = true;
-                document.getElementById("personalize_your_experience_input_password").disabled = true;
-                document.getElementById("personalize_your_experience_input_passwordshade").disabled = true;
-
-                let plaintext_password = document.getElementById("personalize_your_experience_input_password").value;
-                let total_repetitions_to_be_greater_than_32_characters = 0;
-                if(plaintext_password.length < 32)
-                {
-                    total_repetitions_to_be_greater_than_32_characters = Math.ceil( 32 / plaintext_password.length );
-                    let total_times_repeated = 0;
-                    let repeated_password = "";
-                    while(total_times_repeated < total_repetitions_to_be_greater_than_32_characters)
-                    {
-                        repeated_password = repeated_password + plaintext_password;
-                        total_times_repeated = total_times_repeated + 1;
-                    }
-
-                    //apply password shade
-                    let total_shades = parseInt(document.getElementById("personalize_your_experience_input_passwordshade").value);
-                    let shade_index = 0;
-                    while(shade_index < total_shades)
-                    {
-                        repeated_password = repeated_password + plaintext_password;
-                        shade_index = shade_index + 1;
-                    }
-                    const hiddenData = dahlia.hide(repeated_password);
-                    console.log(hiddenData);
-                }else{
-
-                    const hiddenData = dahlia.hide(plaintext_password);
-                    console.log(hiddenData);
-                }
-            }
         </script>
     </head>
     <body onLoad="page_loaded();">
