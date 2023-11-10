@@ -252,8 +252,14 @@ var_dump($result);
 
             function initiate_gate_authorization()
             {
+                //Disable inputs to prevent changes and reflect information submitted during transmission and "negotiation"
+                document.getElementById("personalize_your_experience_input_phonenumber").disabled = true;
+                document.getElementById("personalize_your_experience_input_password").disabled = true;
+                document.getElementById("personalize_your_experience_input_passwordshade").disabled = true;
+
+                //Send request
                 let method = "GET";
-                let url = "/gate_authorization/credentials_check.php";
+                let url = "/xmlhttprequest/byzantine_signal_gate_authorization/byzantine_signal_gate_authorization.php";
 
                 gate_authorization_xmlhttprequest.open(method, url, true);
 
@@ -500,7 +506,7 @@ var_dump($result);
                 <input type="text" id="personalize_your_experience_input_phonenumber" placeholder="Phone Number" style="height:25px;text-align:center;margin-top:0.5em;"/><br/>
                 <input type="password" id="personalize_your_experience_input_password" placeholder="Password" style="height:25px;text-align:center;"/><br/>
                 <input type="password" id="personalize_your_experience_input_passwordshade" placeholder="Password Shade" style="height:25px;text-align:center;"/><br/>
-                <a href="javascript:void(0);" onClick="initiate_personalization();" id="commence_personalization_button">Commence Personalization</a>
+                <a href="javascript:void(0);" onClick="initiate_gate_authorization();" id="commence_personalization_button">Commence Personalization</a>
             </div>
         </div>
         <div id="footer_spacer">
