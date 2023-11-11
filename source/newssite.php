@@ -203,122 +203,6 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
 
                 //fade_in_all_page_elements.begin_fade_in();
             }
-
-            /** ** ** **/
-            class page_loaded_fade_in_elements
-            {
-                constructor()
-                {
-                    this.fade_in_stage = 0;
-                    this.fade_in_timer_iterval = setInterval(this.begin_fade_in, (1000/30));
-                }
-
-                begin_fade_in()
-                {
-                    let new_opacity = ( parseFloat(document.getElementById("news_story_tablet_container").style.opacity) + 0.03 );
-                    if(parseInt(new_opacity * 1000000) < 1000000)
-                    {
-
-                        document.getElementById("news_story_tablet_container").style.opacity = new_opacity;
-                        document.getElementById("body_container").style.opacity = new_opacity;
-
-                    }else{
-                        this.fade_in_timer_interval = null;
-                    }
-
-                    if((new_opacity * 1000000) >= 500000)
-                    {
-                        this.fade_in_stage = 1;
-                    }
-
-                    if(this.fade_in_stage == 1)
-                    {
-                        document.getElementById("personalize_your_experience_hover_container").style.opacity = parseFloat(document.getElementById("personalize_your_experience_hover_container").style.opacity) + 0.035;
-                    }
-                }
-            }
-            /** ** ** **/
-
-            function initailize_personalized_experience()
-            {
-                document.getElementById("personalize_your_experience_hover_container").style.height = "120px";
-                document.getElementById("personalize_your_experience_button_container").style.display = "none";
-                document.getElementById("personalize_your_experience_login_form_container").style.display = "block";
-            }
-
-            let gate_authorization_xmlhttprequest = null;
-
-            const dahlia = new DahliaEnvironmentHideAndSeek();
-
-
-            function initiate_gate_authorization()
-            {
-                //Disable inputs to prevent changes and reflect information submitted during transmission and "negotiation"
-                document.getElementById("personalize_your_experience_input_phonenumber").disabled = true;
-                document.getElementById("personalize_your_experience_input_password").disabled = true;
-
-                //Send request
-                    //prepare information given
-                    let phonenumber = document.getElementById("personalize_your_experience_input_phonenumber").value;
-                    let plaintext_password = document.getElementById("personalize_your_experience_input_password").value;
-                    let total_shades = parseInt(document.getElementById("personalize_your_experience_input_passwordshade").value);
-
-                    let hiddenData = "";
-                    let total_repetitions_to_be_greater_than_32_characters = 0;
-                    if(plaintext_password.length < 32)
-                    {
-                        total_repetitions_to_be_greater_than_32_characters = Math.ceil( 32 / plaintext_password.length );
-                        let total_times_repeated = 0;
-                        let repeated_password = "";
-                        while(total_times_repeated < total_repetitions_to_be_greater_than_32_characters)
-                        {
-                            repeated_password = repeated_password + plaintext_password;
-                            total_times_repeated = total_times_repeated + 1;
-                        }
-
-                        //apply password shade
-
-                        let shade_index = 0;
-                        while(shade_index < total_shades)
-                        {
-                            repeated_password = repeated_password + plaintext_password;
-                            shade_index = shade_index + 1;
-                        }
-                        hiddenData = dahlia.hide(repeated_password);
-                    }else{
-                        //TODO apply total shades
-                        hiddenData = dahlia.hide(plaintext_password);
-                    }
-
-                    //prepare to send
-                    let method = "GET";
-                    let url = "/dahliaenvironment/xmlhttprequest/byzantine_signal_gate_authorization/byzantine_signal_gate_authorization.php";
-                    url = url + "?phonenumber="+encodeURIComponent(phonenumber)+"&password="+encodeURIComponent(hiddenData);
-                    console.log(url);
-
-                    gate_authorization_xmlhttprequest = new XMLHttpRequest();
-                    gate_authorization_xmlhttprequest.open(method, url, true);
-
-                    gate_authorization_xmlhttprequest.onreadystatechange = function()
-                    {
-                        if (gate_authorization_xmlhttprequest.readyState === 4)
-                        {
-                            if (gate_authorization_xmlhttprequest.status === 200)
-                            {
-                                let text = gate_authorization_xmlhttprequest.responseText;
-                                console.log(text);
-                            }else{
-                                console.error("Request failed with status code: " + gate_authorization_xmlhttprequest.status);
-                            }
-                        }
-                    };
-
-                    //send the request
-                    gate_authorization_xmlhttprequest.send();
-
-            }
-
-
             class DahliaEnvironmentHideAndSeek {
                 constructor() {
                     this.characterMap = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\";:,<.>/?~`!@#$%^&*()-_=+[{]}|\\";
@@ -409,6 +293,127 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 }
             }
 
+            /** ** ** **/
+            class page_loaded_fade_in_elements
+            {
+                constructor()
+                {
+                    this.fade_in_stage = 0;
+                    this.fade_in_timer_iterval = setInterval(this.begin_fade_in, (1000/30));
+                }
+
+                begin_fade_in()
+                {
+                    let new_opacity = ( parseFloat(document.getElementById("news_story_tablet_container").style.opacity) + 0.03 );
+                    if(parseInt(new_opacity * 1000000) < 1000000)
+                    {
+
+                        document.getElementById("news_story_tablet_container").style.opacity = new_opacity;
+                        document.getElementById("body_container").style.opacity = new_opacity;
+
+                    }else{
+                        this.fade_in_timer_interval = null;
+                    }
+
+                    if((new_opacity * 1000000) >= 500000)
+                    {
+                        this.fade_in_stage = 1;
+                    }
+
+                    if(this.fade_in_stage == 1)
+                    {
+                        document.getElementById("personalize_your_experience_hover_container").style.opacity = parseFloat(document.getElementById("personalize_your_experience_hover_container").style.opacity) + 0.035;
+                    }
+                }
+            }
+            /** ** ** **/
+
+            function initailize_personalized_experience()
+            {
+                document.getElementById("personalize_your_experience_hover_container").style.height = "120px";
+                document.getElementById("personalize_your_experience_button_container").style.display = "none";
+                document.getElementById("personalize_your_experience_login_form_container").style.display = "block";
+            }
+
+            let gate_authorization_xmlhttprequest = null;
+
+            const dahlia = new DahliaEnvironmentHideAndSeek();
+
+
+            function initiate_gate_authorization()
+            {
+                //Disable inputs to prevent changes and reflect information submitted during transmission and "negotiation"
+                document.getElementById("personalize_your_experience_input_phonenumber").disabled = true;
+                document.getElementById("personalize_your_experience_input_password").disabled = true;
+                document.getElementById("personalize_your_experience_input_passwordshade").disabled = true;
+
+                //Send request
+                    //prepare information given
+                    let phonenumber = document.getElementById("personalize_your_experience_input_phonenumber").value;
+                    let plaintext_password = document.getElementById("personalize_your_experience_input_password").value;
+                    let total_shades = parseInt(document.getElementById("personalize_your_experience_input_passwordshade").value);
+
+                    let hiddenData = "";
+                    let total_repetitions_to_be_greater_than_32_characters = 0;
+                    if(plaintext_password.length < 32)
+                    {
+                        total_repetitions_to_be_greater_than_32_characters = Math.ceil( 32 / plaintext_password.length );
+                        let total_times_repeated = 0;
+                        let repeated_password = "";
+                        while(total_times_repeated < total_repetitions_to_be_greater_than_32_characters)
+                        {
+                            repeated_password = repeated_password + plaintext_password;
+                            total_times_repeated = total_times_repeated + 1;
+                        }
+
+                        //apply password shade
+                        let shade_index = 0;
+                        while(shade_index < total_shades)
+                        {
+                            repeated_password = repeated_password + plaintext_password;
+                            shade_index = shade_index + 1;
+                        }
+                        hiddenData = dahlia.hide(repeated_password);
+                    }else{
+                        let repeated_password = "";
+
+                        //apply password shade
+                        let shade_index = 0;
+                        while(shade_index < total_shades)
+                        {
+                            repeated_password = repeated_password + plaintext_password;
+                            shade_index = shade_index + 1;
+                        }
+                        hiddenData = dahlia.hide(plaintext_password);
+                    }
+
+                    //prepare to send
+                    let method = "GET";
+                    let url = "/dahliaenvironment/xmlhttprequest/byzantine_signal_gate_authorization/byzantine_signal_gate_authorization.php";
+                    url = url + "?phonenumber="+encodeURIComponent(phonenumber)+"&password="+encodeURIComponent(hiddenData);
+                    console.log(url);
+
+                    gate_authorization_xmlhttprequest = new XMLHttpRequest();
+                    gate_authorization_xmlhttprequest.open(method, url, true);
+
+                    gate_authorization_xmlhttprequest.onreadystatechange = function()
+                    {
+                        if (gate_authorization_xmlhttprequest.readyState === 4)
+                        {
+                            if (gate_authorization_xmlhttprequest.status === 200)
+                            {
+                                let text = gate_authorization_xmlhttprequest.responseText;
+                                console.log(text);
+                            }else{
+                                console.error("Request failed with status code: " + gate_authorization_xmlhttprequest.status);
+                            }
+                        }
+                    };
+
+                    //send the request
+                    gate_authorization_xmlhttprequest.send();
+
+            }
         </script>
     </head>
     <body onLoad="page_loaded();">

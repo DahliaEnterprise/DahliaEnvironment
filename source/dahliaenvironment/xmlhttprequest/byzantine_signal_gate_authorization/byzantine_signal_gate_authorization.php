@@ -16,7 +16,7 @@ include("/var/www/html/dahliaenvironment/include_configuration/database/dahliaen
     $gate_authorization = new dahliaenvironment_gate_authorization();
 
     //Commit: Authorization
-    $result = $gate_authorization->authorize_for_stream($dahliaenvironment_database["database_name"], $dahliaenvironment_database["database_username"], $dahliaenvironment_database["database_password"], $dahliaenvironment_database["database_host"], "client_credentials", "1234567890", "password");
-    var_dump($result);
+    $result = $gate_authorization->authorize_for_stream($dahliaenvironment_database["database_name"], $dahliaenvironment_database["database_username"], $dahliaenvironment_database["database_password"], $dahliaenvironment_database["database_host"], "client_credentials", $information_given["phonenumber"], $information_given["password"]);
+    echo json_encode($result);
 
 ?>
