@@ -12,8 +12,8 @@ $newssite_breadcrumbs = new dahliaenvironment_breadcrumbs();
 //Hike (establish a connection)
 $newssite_breadcrumbs->hike("newssite", "root", "password");
 
-/** Cache information **/
-$cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_according_to_plan_using_select_trails_only(["id", "display_name"], "directory_of_categories");
+/** Fetched information **/
+$fetched_of_category_information = $newssite_breadcrumbs->inaugurate_hike_according_to_plan_using_select_trails_only(["id", "display_name"], "directory_of_categories");
 
 ?>
 <html>
@@ -175,6 +175,11 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
             {
                 display:none;
                 margin-top:0.3em;
+            }
+
+            #personalize_your_experience_sms_verification_container
+            {
+                display:none;
             }
 
             #commence_personalization_button
@@ -403,7 +408,15 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                             if (gate_authorization_xmlhttprequest.status === 200)
                             {
                                 let text = gate_authorization_xmlhttprequest.responseText;
-                                console.log(text);
+                                let response_text_as_json_object = JSON.parse(text);
+                                if(response_text_as_json_object.client_found == -1)
+                                {
+                                    document.getElementById("personalize_your_experience_login_form_container").style.display = "none";
+                                    document.getElementById("personalize_your_experience_sms_verification_container").style.display = "block";
+                                }else if(response_text_as_json_object.client_found == 1)
+                                {
+
+                                }
                             }else{
                                 console.error("Request failed with status code: " + gate_authorization_xmlhttprequest.status);
                             }
@@ -425,7 +438,7 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
             <?php
                 $is_first = 1;
                 $row_data = null;
-                while(($row_data = $cache_of_category_information["stmt"]->fetch()) != null)
+                while(($row_data = $fetched_of_category_information["stmt"]->fetch()) != null)
                 {
                     if($is_first == 1)
                     {
@@ -508,6 +521,13 @@ $cache_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accordin
                 <input type="password" id="personalize_your_experience_input_password" placeholder="Password" style="height:25px;text-align:center;"/><br/>
                 <input type="password" id="personalize_your_experience_input_passwordshade" placeholder="Password Shade" style="height:25px;text-align:center;"/><br/>
                 <a href="javascript:void(0);" onClick="initiate_gate_authorization();" id="commence_personalization_button">Commence Personalization</a>
+            </div>
+            <div id="personalize_your_experience_sms_verification_container">
+                <div style="font-size:1em;">Enter your sms text messaging code</div>
+                <form action="javascript:void(0);" method="post">
+                    <input type="text" placeholder="000000" style="text-align:center;"/>
+                </form>
+                <a href="javascript:void(0);" style="text-decoration:none;color:#FFF;">Authenticate Phone Connection</a>
             </div>
         </div>
         <div id="footer_spacer">
