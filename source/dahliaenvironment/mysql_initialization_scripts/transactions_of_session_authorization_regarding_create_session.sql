@@ -1,0 +1,1 @@
+CREATE TABLE transactions_of_session_authorization_regarding_create_session (id BIGINT PRIMARY KEY AUTO_INCREMENT, client_credentials_id MEDIUMINT, sha256_regarding_session_authorization_code_to_create_session VARCHAR(64) UNIQUE, timestamp MEDIUMINT);
