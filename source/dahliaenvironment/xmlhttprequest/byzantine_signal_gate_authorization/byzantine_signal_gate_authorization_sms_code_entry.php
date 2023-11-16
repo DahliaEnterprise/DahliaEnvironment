@@ -12,6 +12,11 @@ include("/var/www/html/dahliaenvironment/include_configuration/database/dahliaen
     $information_given["gate_authorization_transaction_identification_code"] = $_GET["transaction_identification_code"];
     $information_given["sms_code"] = $_GET["smscode"];
 
+    //Create a new gate authorization object
+    $gate_authorization = new dahliaenvironment_gate_authorization();
+
+    //Using the transaction_identification_code determine if the sms code is a match
+    $gate_authorization->
     /*
     //create a new gate authorization object
     $gate_authorization = new dahliaenvironment_gate_authorization();

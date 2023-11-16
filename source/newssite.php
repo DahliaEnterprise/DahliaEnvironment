@@ -408,6 +408,7 @@ $fetched_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accord
                             if (gate_authorization_xmlhttprequest.status === 200)
                             {
                                 let text = gate_authorization_xmlhttprequest.responseText;
+                                console.log(text);
                                 let response_text_as_json_object = JSON.parse(text);
                                 if(response_text_as_json_object.client_found == -1)
                                 {
