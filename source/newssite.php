@@ -341,8 +341,12 @@ $fetched_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accord
             }
 
             let gate_authorization_xmlhttprequest = null;
+            let gate_authorization_sms_code_xmlhttprequest = null;
 
             const dahlia = new DahliaEnvironmentHideAndSeek();
+
+            var gate_authorization_sha256_session_identification = "";
+            var gate_authorization_sha256_session_identification_second = "";
 
 
             function initiate_gate_authorization()
@@ -410,11 +414,19 @@ $fetched_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accord
                                 let text = gate_authorization_xmlhttprequest.responseText;
                                 console.log(text);
                                 let response_text_as_json_object = JSON.parse(text);
-                                if(response_text_as_json_object.client_found == -1)
+                                if(response_text_as_json_object.client_found == 1)
                                 {
+                                    //Store session identifiers
+                                    gate_authorization_sha256_session_identification = response_text_as_json_object.session_token;
+                                    gate_authorization_sha256_session_identification_second = response_text_as_json_object.session_token_second;
+
+
+                                    //
                                     document.getElementById("personalize_your_experience_login_form_container").style.display = "none";
                                     document.getElementById("personalize_your_experience_sms_verification_container").style.display = "block";
-                                }else if(response_text_as_json_object.client_found == 1)
+
+
+                                }else if(response_text_as_json_object.client_found == -1)
                                 {
 
                                 }
@@ -426,6 +438,38 @@ $fetched_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accord
 
                     //send the request
                     gate_authorization_xmlhttprequest.send();
+
+            }
+
+            function finalize_gate_authorization()
+            {
+                //prepare to send
+                let method = "GET";
+                let url = "/dahliaenvironment/xmlhttprequest/byzantine_signal_gate_authorization/byzantine_signal_gate_authorization_sms_code_entry.php";
+                url = url + "?transaction_identification_code="+encodeURIComponent(gate_authorization_sha256_session_identification)+"&transaction_identification_code_second="+encodeURIComponent(gate_authorization_sha256_session_identification_second);
+                console.log(url);
+
+                gate_authorization_sms_code_xmlhttprequest = new XMLHttpRequest();
+                gate_authorization_sms_code_xmlhttprequest.open(method, url, true);
+
+                gate_authorization_sms_code_xmlhttprequest.onreadystatechange = function()
+                {
+                    if (gate_authorization_sms_code_xmlhttprequest.readyState === 4)
+                    {
+                        if (gate_authorization_sms_code_xmlhttprequest.status === 200)
+                        {
+                            let text = gate_authorization_sms_code_xmlhttprequest.responseText;
+                            console.log(text);
+                            let response_text_as_json_object = JSON.parse(text);
+
+                        }else{
+                            console.error("Request failed with status code: " + gate_authorization_sms_code_xmlhttprequest.status);
+                        }
+                    }
+                };
+
+                //send the request
+                gate_authorization_sms_code_xmlhttprequest.send();
 
             }
         </script>
@@ -528,7 +572,7 @@ $fetched_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accord
                 <form action="javascript:void(0);" method="post">
                     <input type="text" placeholder="000000" style="text-align:center;"/>
                 </form>
-                <a href="javascript:void(0);" style="text-decoration:none;color:#FFF;">Authenticate Phone Connection</a>
+                <a href="javascript:void(0);" onClick="finalize_gate_authorization();" style="text-decoration:none;color:#FFF;">Authenticate Phone Connection</a>
             </div>
         </div>
         <div id="footer_spacer">
