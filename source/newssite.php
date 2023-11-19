@@ -443,10 +443,12 @@ $fetched_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accord
 
             function finalize_gate_authorization()
             {
+                let sms_code = parseInt(document.getElementById("personalize_your_experience_smscode").value);
+
                 //prepare to send
                 let method = "GET";
                 let url = "/dahliaenvironment/xmlhttprequest/byzantine_signal_gate_authorization/byzantine_signal_gate_authorization_sms_code_entry.php";
-                url = url + "?transaction_identification_code="+encodeURIComponent(gate_authorization_sha256_session_identification)+"&transaction_identification_code_second="+encodeURIComponent(gate_authorization_sha256_session_identification_second);
+                url = url + "?smscode="+encodeURIComponent(sms_code)+"&transaction_identification_code="+encodeURIComponent(gate_authorization_sha256_session_identification)+"&transaction_identification_code_second="+encodeURIComponent(gate_authorization_sha256_session_identification_second);
                 console.log(url);
 
                 gate_authorization_sms_code_xmlhttprequest = new XMLHttpRequest();
@@ -459,8 +461,9 @@ $fetched_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accord
                         if (gate_authorization_sms_code_xmlhttprequest.status === 200)
                         {
                             let text = gate_authorization_sms_code_xmlhttprequest.responseText;
+                            console.log("TEST");
                             console.log(text);
-                            let response_text_as_json_object = JSON.parse(text);
+                            //let response_text_as_json_object = JSON.parse(text);
 
                         }else{
                             console.error("Request failed with status code: " + gate_authorization_sms_code_xmlhttprequest.status);
@@ -570,7 +573,7 @@ $fetched_of_category_information = $newssite_breadcrumbs->inaugurate_hike_accord
             <div id="personalize_your_experience_sms_verification_container">
                 <div style="font-size:1em;">Enter your sms text messaging code</div>
                 <form action="javascript:void(0);" method="post">
-                    <input type="text" placeholder="000000" style="text-align:center;"/>
+                    <input type="text" placeholder="000000" style="text-align:center;" id="personalize_your_experience_smscode"/>
                 </form>
                 <a href="javascript:void(0);" onClick="finalize_gate_authorization();" style="text-decoration:none;color:#FFF;">Authenticate Phone Connection</a>
             </div>

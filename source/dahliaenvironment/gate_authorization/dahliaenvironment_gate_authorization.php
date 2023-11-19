@@ -59,5 +59,29 @@ class dahliaenvironment_gate_authorization
         return $output;
     }
 
+    function finalize_gate_authorization($database_name, $database_username, $database_password, $database_host, $database_table_name, $smscode_hashed_by_client, $sha256_session_identification, $sha256_session_identification_second)
+    {
+
+        //TEMPORARILY hashed by server
+        $smscode_hashed_by_client = hash("sha256", $smscode_hashed_by_client);
+
+        $database_connection_handle = new PDO("mysql:host=".$database_host.";dbname=".$database_name.";", $database_username, $database_password);
+
+        $query_as_string_match_identification = "SELECT `id` FROM `transactions_of_session_authorization_regarding_create_session` WHERE `sha256_regarding_session_authorization_code_to_create_session` = ? AND `sha256_session_identification` = ? AND `sha256_session_identification_second` = ? LIMIT 0,1";
+        $stmt = $database_connection_handle->prepare($query_as_string_match_identification);
+        $stmt->bindParam(1, $smscode_hashed_by_client, PDO::PARAM_STR);
+        $stmt->bindParam(2, $sha256_session_identification, PDO::PARAM_STR);
+        $stmt->bindParam(3, $sha256_session_identification_second, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $fetched_row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($fetched_row != false)
+        {
+            return $fetched_row["id"];
+        }else{
+            //return nothing found
+            return -1;
+        }
+    }
 }
 ?>
