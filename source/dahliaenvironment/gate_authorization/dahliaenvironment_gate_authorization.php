@@ -67,17 +67,25 @@ class dahliaenvironment_gate_authorization
 
         $database_connection_handle = new PDO("mysql:host=".$database_host.";dbname=".$database_name.";", $database_username, $database_password);
 
-        $query_as_string_match_identification = "SELECT `id` FROM `transactions_of_session_authorization_regarding_create_session` WHERE `sha256_regarding_session_authorization_code_to_create_session` = ? AND `sha256_session_identification` = ? AND `sha256_session_identification_second` = ? LIMIT 0,1";
+        $query_as_string_match_identification = "SELECT `id`, `sha256_regarding_session_authorization_code_to_create_session`, `timestamp` FROM `transactions_of_session_authorization_regarding_create_session` WHERE `sha256_session_identification` = ? AND `sha256_session_identification_second` = ? LIMIT 0,1";
         $stmt = $database_connection_handle->prepare($query_as_string_match_identification);
-        $stmt->bindParam(1, $smscode_hashed_by_client, PDO::PARAM_STR);
-        $stmt->bindParam(2, $sha256_session_identification, PDO::PARAM_STR);
-        $stmt->bindParam(3, $sha256_session_identification_second, PDO::PARAM_STR);
+        $stmt->bindParam(1, $sha256_session_identification, PDO::PARAM_STR);
+        $stmt->bindParam(2, $sha256_session_identification_second, PDO::PARAM_STR);
         $stmt->execute();
 
         $fetched_row = $stmt->fetch(PDO::FETCH_ASSOC);
         if($fetched_row != false)
         {
-            return $fetched_row["id"];
+            $sha256_of_hashed_smscode = $fetched_row["sha256_regarding_session_authorization_code_to_create_session"];
+            $user_input_sha256_hashed_smscode = hash("sha256", $fetched_row["timestamp"].intval($smscode_hashed_by_client));
+            if(hash_equals($sha256_of_hashed_smscode, $user_input_sha256_hashed_smscode) == true)
+            {
+                return $fetched_row["id"];
+            }else{
+                return -1;
+            }
+
+
         }else{
             //return nothing found
             return -1;
