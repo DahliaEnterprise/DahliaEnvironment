@@ -20,7 +20,7 @@
             #body_content
             {
                 min-width:200px;
-                max-width:500px;
+                max-width:700px;
 
             }
 
@@ -42,27 +42,9 @@
 
             }
 
-            #sponsored_posts
-            {
-                width:99.999999%;
 
-                overflow-y:hidden;
-            }
-
-            #sponsored_posts_scroll_container
-            {
-                 height:230px;
-                 width:500px;
-            }
-
-            .sponsored_posts_post_container
-            {
-                float:left;
-                width:150px;
-                height:200px;
-            }
-
-            #trending_header
+            /* Subheader, Trending, and color graded containers */
+            #subheader
             {
                 font-family: pacifico;
                 text-align:center;
@@ -86,10 +68,34 @@
             {
                 font-size:1.2em;
                 font-family: pacifico;
-                padding:0.5em;
+                padding:0.5em 0.5em 0.5em 0.9em;
             }
 
             .trending_posts_row_excerpt
+            {
+                font-size:1.7em;
+                font-family: DancingScript;
+                padding:0 0.5em 0 0.5em;
+            }
+
+            .colorgrade_one_post_row_container
+            {
+                width:99.999999%;
+                border:1px solid #fabdcf;
+                border-radius:5px;
+                background:#f6cad6;
+                margin-bottom:1em;
+                padding-bottom:0.5em;
+            }
+
+            .colorgrade_one_post_row_header
+            {
+                font-size:1.2em;
+                font-family: pacifico;
+                padding:0.5em 0.5em 0.5em 0.9em;
+            }
+
+            .colorgrade_one_post_row_excerpt
             {
                 font-size:1.7em;
                 font-family: DancingScript;
@@ -111,28 +117,18 @@
             <!-- Header Title -->
             <div id="header_title">Xcerpts</div>
 
-            <!-- Sponsored Posts -->
-            <div id="sponsored_posts">
-                <div id="sponsored_posts_scroll_container">
-                        <img class="sponsored_posts_post_container" src="/non_licensed_images/news_article_image.jpg" style="width:140px;height:200px;border-radius:15px;padding:0 0.5em 0 0.8em;"/>
-                        <img class="sponsored_posts_post_container" src="/non_licensed_images/news_article_image.jpg" style="width:140px;height:200px;border-radius:15px;padding:0 0.5em 0 0.8em;"/>
-
-                        <img class="sponsored_posts_post_container" src="/non_licensed_images/news_article_image.jpg" style="width:140px;height:200px;border-radius:15px;padding:0 0.5em 0 0.8em;"/>
-
-                </div>
-            </div>
-
             <!-- Trending Posts -->
                 <!-- Trending Header -->
-                <div id="trending_header">
+                <div id="subheader">
                     Trending
                 </div>
                 <div id="trending_posts_container">
                     <div class="trending_posts_row_container">
                         <div class="trending_posts_row_header">
-                            Science
+                            Todays forcast on the flu
                         </div>
-                        <div class="trending_posts_row_excerpt">
+                        <div class="colorgrade_one_post_row_excerpt">
+                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:90px;height:90px;border-radius:15px;margin-right:0.5em;"/>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </div>
                     </div>
@@ -140,7 +136,8 @@
                         <div class="trending_posts_row_header">
                             Science
                         </div>
-                        <div class="trending_posts_row_excerpt">
+                        <div class="colorgrade_one_post_row_excerpt">
+                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:90px;height:90px;border-radius:15px;margin-right:0.5em;"/>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </div>
                     </div>
@@ -148,7 +145,46 @@
                         <div class="trending_posts_row_header">
                             Science
                         </div>
+                        <div class="colorgrade_one_post_row_excerpt">
+                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:90px;height:90px;border-radius:15px;margin-right:0.5em;"/>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </div>
+                    </div>
+                </div>
+            <!-- End Trending Posts -->
+
+            <div style="width:99.999999%;height:25px;">&nbsp;</div>
+
+            <!-- Nutrient Spotlight Posts -->
+                <!-- Trending Header -->
+                <div id="subheader">
+                    Nutrient Spotlight
+                </div>
+                <div id="trending_posts_container">
+                    <div class="colorgrade_one_post_row_container">
+                        <div class="colorgrade_one_post_row_header">
+                            Todays forcast on the flu
+                        </div>
                         <div class="trending_posts_row_excerpt">
+                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:90px;height:90px;border-radius:15px;margin-right:0.5em;"/>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </div>
+                    </div>
+                    <div class="colorgrade_one_post_row_container">
+                        <div class="colorgrade_one_post_row_header">
+                            Science
+                        </div>
+                        <div class="trending_posts_row_excerpt">
+                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:90px;height:90px;border-radius:15px;margin-right:0.5em;"/>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </div>
+                    </div>
+                    <div class="colorgrade_one_post_row_container">
+                        <div class="colorgrade_one_post_row_header">
+                            Science
+                        </div>
+                        <div class="trending_posts_row_excerpt">
+                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:90px;height:90px;border-radius:15px;margin-right:0.5em;"/>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </div>
                     </div>
