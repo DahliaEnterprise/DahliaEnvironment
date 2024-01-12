@@ -20,7 +20,7 @@
             #body_content
             {
                 min-width:200px;
-                max-width:700px;
+                max-width:1024px;
 
             }
 
@@ -31,7 +31,7 @@
 
             #header_title
             {
-                font-size:3em;
+                font-size:7em;
                 font-family:pacifico;
                 padding:0.1em;
                 background: -webkit-linear-gradient(#6b1538, #38032d);
@@ -48,7 +48,7 @@
             {
                 font-family: pacifico;
                 text-align:center;
-                font-size:1.7em;
+                font-size:3em;
                 background: -webkit-linear-gradient(#6b1538, #38032d);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
@@ -57,6 +57,7 @@
             .trending_posts_row_container
             {
                 width:99.999999%;
+                min-height:150px;
                 border:1px solid #fad2de;
                 border-radius:5px;
                 background:#ffebf1;
@@ -66,9 +67,9 @@
 
             .trending_posts_row_header
             {
-                font-size:1.2em;
+                font-size:2.5em;
                 font-family: pacifico;
-                padding:0.5em 0.5em 0.5em 0.9em;
+                padding:0.2em 0.2em 0.2em 0.5em;
             }
 
             .trending_posts_row_excerpt
@@ -81,6 +82,7 @@
             .colorgrade_one_post_row_container
             {
                 width:99.999999%;
+                min-height:200px;
                 border:1px solid #fabdcf;
                 border-radius:5px;
                 background:#f6cad6;
@@ -128,8 +130,8 @@
                             Todays forcast on the flu
                         </div>
                         <div class="colorgrade_one_post_row_excerpt">
-                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:90px;height:90px;border-radius:15px;margin-right:0.5em;"/>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:120px;height:120px;border-radius:15px;margin-right:0.5em;"/>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </div>
                     </div>
                     <div class="trending_posts_row_container">
@@ -137,8 +139,8 @@
                             Science
                         </div>
                         <div class="colorgrade_one_post_row_excerpt">
-                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:90px;height:90px;border-radius:15px;margin-right:0.5em;"/>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:120px;height:120px;border-radius:15px;margin-right:0.5em;"/>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </div>
                     </div>
                     <div class="trending_posts_row_container">
@@ -146,8 +148,8 @@
                             Science
                         </div>
                         <div class="colorgrade_one_post_row_excerpt">
-                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:90px;height:90px;border-radius:15px;margin-right:0.5em;"/>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:120px;height:120px;border-radius:15px;margin-right:0.5em;"/>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </div>
                     </div>
                 </div>
@@ -166,8 +168,8 @@
                             Todays forcast on the flu
                         </div>
                         <div class="trending_posts_row_excerpt">
-                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:90px;height:90px;border-radius:15px;margin-right:0.5em;"/>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:120px;height:120px;border-radius:15px;margin-right:0.5em;"/>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </div>
                     </div>
                     <div class="colorgrade_one_post_row_container">
@@ -175,8 +177,8 @@
                             Science
                         </div>
                         <div class="trending_posts_row_excerpt">
-                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:90px;height:90px;border-radius:15px;margin-right:0.5em;"/>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:120px;height:120px;border-radius:15px;margin-right:0.5em;"/>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </div>
                     </div>
                     <div class="colorgrade_one_post_row_container">
@@ -184,8 +186,8 @@
                             Science
                         </div>
                         <div class="trending_posts_row_excerpt">
-                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:90px;height:90px;border-radius:15px;margin-right:0.5em;"/>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:120px;height:120px;border-radius:15px;margin-right:0.5em;"/>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </div>
                     </div>
                 </div>
