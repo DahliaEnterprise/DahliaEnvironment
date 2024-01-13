@@ -1,3 +1,6 @@
+<?php
+include("/var/www/html/dahliaenvironment/dahliaenvironment.php");
+?>
 <html>
     <head>
         <title>Newssite, Mobile</title>

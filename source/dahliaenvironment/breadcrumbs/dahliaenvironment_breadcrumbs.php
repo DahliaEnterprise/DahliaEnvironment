@@ -1,5 +1,18 @@
 <?php
 
+/**
+    Abstract and non complete instructions
+        create object
+        $newssite_breadcrumbs = new dahliaenvironment_breadcrumbs();
+
+        (establish a connection)
+        $newssite_breadcrumbs->hike("newssite", "root", "password");
+
+        fetch information
+        $fetched_of_category_information = $newssite_breadcrumbs->inaugurate_hike_according_to_plan_using_select_trails_only(["id", "display_name"], "directory_of_categories");
+
+    End of abstract and non complete instructions
+**/
 class dahliaenvironment_breadcrumbs
 {
 	public $mysql_connection_handle = null;
