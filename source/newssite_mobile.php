@@ -1,5 +1,23 @@
 <?php
 include("/var/www/html/dahliaenvironment/dahliaenvironment.php");
+$newssite_breadcrumbs = new dahliaenvironment_breadcrumbs();
+$newssite_breadcrumbs->hike("newssite_mobile", "root", "password");
+$newssite_breadcrumbs->order_ornaments("ORDER BY `front_page_ordered_list_index_point` ASC");
+$fetched_of_category_information = $newssite_breadcrumbs->inaugurate_hike_according_to_plan_using_select_trails_only(["id", "display_category_name"], "heritage_category_index");
+$is_first = 1;
+$row_data = null;
+while(($row_data = $fetched_of_category_information["stmt"]->fetch()) != null)
+{
+    if($is_first == 1)
+    {
+        echo $row_data["display_name"];
+        $is_first = 0;
+    }else if($is_first == 0)
+    {
+        echo "&nbsp;&middot;&nbsp;".$row_data["display_name"];
+    }
+}
+
 ?>
 <html>
     <head>
@@ -44,6 +62,25 @@ include("/var/www/html/dahliaenvironment/dahliaenvironment.php");
                 text-align:center;
 
             }
+
+            .profile_icon_container_left
+            {
+                float:left;
+            }
+
+            .profile_icon_container_right
+            {
+                float:right;
+            }
+
+            .profile_icon_img
+            {
+                width:100px;
+                height:100px;
+                border-radius:33px;
+            }
+
+
 
 
             /* Subheader, Trending, and color graded containers */
@@ -113,10 +150,10 @@ include("/var/www/html/dahliaenvironment/dahliaenvironment.php");
             <!-- Header Icons -->
             <div id="header_icons">
                 <!-- Profile/Menu Icon-->
-                <div style="float:left;"><img style="width:35px;height:35px;border-radius:33px;" src="/externally_aquired_icons/iconoir/profile-circle.svg"></div>
+                <div class="profile_icon_container_left"><img class="profile_icon_img" src="/externally_aquired_icons/iconoir/profile-circle.svg"></div>
 
                 <!-- Notifications Icon -->
-                <div style="float:right;"><img style="width:35px;height:35px;border-radius:33px;" src="/externally_aquired_icons/iconoir/bell-notification.svg"></div>
+                <div class="profile_icon_container_right"><img class="profile_icon_img" src="/externally_aquired_icons/iconoir/bell-notification.svg"></div>
             </div>
 
             <!-- Header Title -->
