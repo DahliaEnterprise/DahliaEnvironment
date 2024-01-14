@@ -22,7 +22,10 @@ class dahliaenvironment_breadcrumbs
 		
 		public $selected_trails_table_selected_by_name = "";
 
-	
+                //Order ornaments operations related
+                public $order_ornaments_directive = "";
+
+        /** Low Level Functions **/
 	function hike($database_name, $username, $password)
 	{
 		$this->mysql_connection_handle = new PDO("mysql:host=localhost;dbname=".$database_name.";", $username, $password);
@@ -44,6 +47,13 @@ class dahliaenvironment_breadcrumbs
 		$this->table_selected_by_name = $set_from_table;
 	}
 	
+        function order_ornaments($order_directive)
+        {
+            $this->order_ornaments_directive = $order_directive;
+        }
+        /* End low level functions */
+
+        /* High level functions */
 	function walk_the_select_trails_operation()
 	{
 		$output = [];
@@ -82,6 +92,12 @@ class dahliaenvironment_breadcrumbs
 					
 					//
 					$query_as_string .= $this->table_selected_by_name;
+
+                                        //
+                                        if(isset($this->order_ornaments_directive) == true)
+                                        {
+                                            $query_as_string .= " ".$this->order_ornaments_directive;
+                                        }
 					
 				//run query
 				$output["stmt"] = $this->mysql_connection_handle->query($query_as_string);
