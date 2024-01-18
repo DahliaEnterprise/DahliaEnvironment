@@ -4,19 +4,6 @@ $newssite_breadcrumbs = new dahliaenvironment_breadcrumbs();
 $newssite_breadcrumbs->hike("newssite_mobile", "root", "password");
 $newssite_breadcrumbs->order_ornaments("ORDER BY `front_page_ordered_list_index_point` ASC");
 $fetched_of_category_information = $newssite_breadcrumbs->inaugurate_hike_according_to_plan_using_select_trails_only(["id", "display_category_name"], "heritage_category_index");
-$is_first = 1;
-$row_data = null;
-while(($row_data = $fetched_of_category_information["stmt"]->fetch()) != null)
-{
-    if($is_first == 1)
-    {
-        echo $row_data["display_name"];
-        $is_first = 0;
-    }else if($is_first == 0)
-    {
-        echo "&nbsp;&middot;&nbsp;".$row_data["display_name"];
-    }
-}
 
 ?>
 <html>
@@ -196,43 +183,60 @@ while(($row_data = $fetched_of_category_information["stmt"]->fetch()) != null)
             <!-- End Trending Posts -->
 
             <div style="width:99.999999%;height:25px;">&nbsp;</div>
+            <?php
+                $css_identifiers = [];
+                $css_identifiers[0] = "one";
 
-            <!-- Nutrient Spotlight Posts -->
-                <!-- Trending Header -->
-                <div id="subheader">
-                    Nutrient Spotlight
-                </div>
-                <div id="trending_posts_container">
-                    <div class="colorgrade_one_post_row_container">
-                        <div class="colorgrade_one_post_row_header">
-                            Todays forcast on the flu
-                        </div>
-                        <div class="trending_posts_row_excerpt">
-                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:120px;height:120px;border-radius:15px;margin-right:0.5em;"/>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </div>
-                    </div>
-                    <div class="colorgrade_one_post_row_container">
-                        <div class="colorgrade_one_post_row_header">
-                            Science
-                        </div>
-                        <div class="trending_posts_row_excerpt">
-                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:120px;height:120px;border-radius:15px;margin-right:0.5em;"/>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </div>
-                    </div>
-                    <div class="colorgrade_one_post_row_container">
-                        <div class="colorgrade_one_post_row_header">
-                            Science
-                        </div>
-                        <div class="trending_posts_row_excerpt">
-                            <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:120px;height:120px;border-radius:15px;margin-right:0.5em;"/>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </div>
-                    </div>
-                </div>
-            <!-- End Trending Posts -->
+                $css_identifiers_index = 0;
 
+                //For each category, display the selected articles
+                $row_data = null;
+                while(($row_data = $fetched_of_category_information["stmt"]->fetch()) != null)
+                {
+                    echo $row_data["display_category_name"];
+            ?>
+                <!-- Nutrient Spotlight Posts -->
+                    <!-- Nutrient Header -->
+                    <div id="subheader">
+                        Nutrient Spotlight
+                    </div>
+                    <div id="trending_posts_container">
+                        <div class="colorgrade_<?php echo $css_identifiers[$css_identifiers_index];?>_post_row_container">
+                            <div class="colorgrade_<?php echo $css_identifiers[$css_identifiers_index];?>_post_row_header">
+                                Todays forcast on the flu
+                            </div>
+                            <div class="trending_posts_row_excerpt">
+                                <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:120px;height:120px;border-radius:15px;margin-right:0.5em;"/>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </div>
+                        </div>
+                        <div class="colorgrade_<?php echo $css_identifiers[$css_identifiers_index];?>_post_row_container">
+                            <div class="colorgrade_<?php echo $css_identifiers[$css_identifiers_index];?>_post_row_header">
+                                Science
+                            </div>
+                            <div class="trending_posts_row_excerpt">
+                                <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:120px;height:120px;border-radius:15px;margin-right:0.5em;"/>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </div>
+                        </div>
+                        <div class="colorgrade_<?php echo $css_identifiers[$css_identifiers_index];?>_post_row_container">
+                            <div class="colorgrade_<?php echo $css_identifiers[$css_identifiers_index];?>_post_row_header">
+                                Science
+                            </div>
+                            <div class="trending_posts_row_excerpt">
+                                <img src="/non_licensed_images/news_article_image.jpg" style="float:left;width:120px;height:120px;border-radius:15px;margin-right:0.5em;"/>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </div>
+                        </div>
+                    </div>
+                <!-- End Nutrient Spotlight Posts -->
+            <?php
+                }
+            ?>
+
+
+
+            <!-- Empty Space Footer -->
             <div>
                 <br/><br/><br/>
             </div>
